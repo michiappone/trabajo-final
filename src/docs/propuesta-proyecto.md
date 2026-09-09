@@ -14,6 +14,12 @@ El problema aparece cuando un material se separa del conjunto correspondiente a 
 
 Esto puede provocar que, al momento de necesitarlo nuevamente, no se sepa dónde se encuentra y se termine utilizando un material perteneciente a otro transformador, generando una cadena de faltantes.
 
+### Medición del impacto actual
+
+Según una estimación inicial basada en la experiencia de los operarios, la búsqueda de materiales puede ocasionar una pérdida de entre 10 minutos y 4 horas por jornada, dependiendo del tipo de material, su ubicación y la tarea que se esté realizando.
+
+Esta información se considera una estimación preliminar. Durante el desarrollo del proyecto se realizará un registro semanal de los tiempos destinados a localizar materiales, con el objetivo de establecer una línea base y comparar posteriormente los resultados obtenidos con la utilización del sistema.
+
 ## Solución propuesta
 
 Desarrollar una aplicación web que permita registrar y consultar la ubicación de materiales asociados a transformadores dentro de áreas productivas.
