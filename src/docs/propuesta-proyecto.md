@@ -121,6 +121,22 @@ Quedan fuera del alcance inicial:
 - Importación masiva mediante archivos CSV o Excel.
 - Funcionamiento fuera de la red local de la fábrica.
 
+## Análisis de viabilidad
+
+### Viabilidad técnica
+
+El proyecto es técnicamente viable porque utilizará tecnologías conocidas por los integrantes: Java, Spring Boot, Spring Data JPA, PostgreSQL, HTML, CSS y JavaScript. La aplicación podrá ejecutarse en un equipo conectado a la red local y utilizarse desde los navegadores de las computadoras y dispositivos móviles autorizados.
+
+Será necesario confirmar la disponibilidad del equipo que funcionará como servidor, la cobertura de la red interna y el acceso desde los dispositivos utilizados en el área.
+
+### Viabilidad temporal
+
+El proyecto se desarrollará durante doce semanas. La primera versión se limitará al área de Terminación y a las funciones esenciales de trazabilidad, lo que permite mantener un alcance compatible con el tiempo disponible.
+
+### Viabilidad del dominio
+
+Michael trabaja en la planta y posee acceso al área en la que se presenta el problema. Esto permite observar el proceso, consultar a los operarios y validar el funcionamiento del sistema mediante una prueba piloto.
+
 
 ## Tecnologías
 
