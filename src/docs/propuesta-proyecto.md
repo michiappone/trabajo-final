@@ -138,6 +138,29 @@ El proyecto se desarrollará durante doce semanas. La primera versión se limita
 Michael trabaja en la planta y posee acceso al área en la que se presenta el problema. Esto permite observar el proceso, consultar a los operarios y validar el funcionamiento del sistema mediante una prueba piloto.
 
 
+## Alternativas consideradas
+
+### Registros manuales
+
+El uso de planillas en papel tiene un costo inicial bajo, pero dificulta la actualización de la información, la búsqueda de registros y la consulta del historial.
+
+### Archivos Excel o CSV
+
+Permiten registrar información de manera sencilla, pero pueden producir versiones duplicadas, modificaciones simultáneas y dificultades para conocer la ubicación actual de cada material. Los archivos CSV o Excel podrán considerarse en el futuro como mecanismo de importación o contingencia.
+
+### Software comercial de gestión
+
+Existen sistemas empresariales de inventario y trazabilidad, pero suelen estar orientados al control general de stock y pueden requerir costos de licencia, infraestructura adicional o una adaptación compleja al proceso específico de la fábrica.
+
+### Aplicación móvil nativa
+
+Podría facilitar el uso desde celulares, pero requeriría mantener una aplicación diferente para cada plataforma. Una aplicación web responsive permite utilizar el sistema desde computadoras y celulares mediante un navegador.
+
+### Alternativa seleccionada
+
+Se seleccionó el desarrollo de una aplicación web propia, ejecutada dentro de la red local, porque puede adaptarse al proceso de la fábrica y no requiere una conexión permanente a Internet.
+
+
 ## Tecnologías
 
 ### Backend
