@@ -89,18 +89,38 @@ Podrá:
 
 ## Alcance
 
-El sistema estará enfocado en la trazabilidad de materiales dentro del proceso productivo.
+La primera versión del sistema estará enfocada en la trazabilidad de materiales dentro del área de Terminación.
+
+### Funcionalidades incluidas
+
+- Gestión de áreas y ubicaciones.
+- Gestión de transformadores y números UN.
+- Registro de materiales asociados a cada transformador.
+- Consulta de la ubicación actual de los materiales.
+- Registro de ingresos, traslados internos, devoluciones a depósito y pases a despacho.
+- Registro del usuario que realizó cada movimiento.
+- Consulta del historial de movimientos.
+- Registro de observaciones.
+- Uso de ubicaciones principales y temporales.
+- Generación y lectura de códigos QR asociados a las ubicaciones.
+- Advertencias cuando un material corresponda a otro transformador.
+- Acceso desde computadoras y dispositivos móviles conectados a la red local.
+
+### Exclusiones de la primera versión
 
 Quedan fuera del alcance inicial:
 
 - Planificación de producción.
 - Ensayos.
-- Calidad.
-- Compras.
-- Proveedores.
+- Gestión de calidad.
+- Compras y proveedores.
 - Mantenimiento.
-- Stock general.
-- Gestión completa de depósito.
+- Control del stock general.
+- Gestión completa del depósito.
+- Colocación de códigos QR individuales sobre los materiales.
+- Importación masiva mediante archivos CSV o Excel.
+- Funcionamiento fuera de la red local de la fábrica.
+
 
 ## Tecnologías
 
