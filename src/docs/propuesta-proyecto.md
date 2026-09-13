@@ -210,6 +210,24 @@ Las copias de seguridad se realizarán automáticamente una vez por semana y pod
 
 Las características técnicas del equipo, como el sistema operativo, la memoria RAM, el procesador y el espacio de almacenamiento, se definirán antes de instalar la aplicación.
 
+## Riesgos y medidas de mitigación
+
+| Riesgo | Medida de mitigación |
+|---|---|
+| Interrupción de la conexión Wi-Fi | Controlar la estabilidad de la red y evaluar una conexión por cable si se producen interrupciones. |
+| Falla del equipo donde se ejecuta la aplicación | Realizar copias de seguridad automáticas en un servidor local diferente. |
+| Fallas no detectadas en las copias de seguridad | Designar un administrador responsable de verificar periódicamente los respaldos. |
+| Movimientos no registrados | Diseñar un formulario sencillo que permita registrar el movimiento y agregar observaciones. |
+| Operarios de diferentes turnos | Permitir que cualquier operario habilitado registre un movimiento, aunque no haya realizado el registro anterior. |
+| Uso de materiales de otro transformador | Mostrar una advertencia antes de confirmar el movimiento. |
+| Reubicación de tarimas | Identificar las ubicaciones mediante códigos QR. |
+| Resistencia al uso del sistema | Diseñar pantallas sencillas y realizar una prueba piloto con operarios. |
+| Ampliación excesiva del alcance | Limitar la primera versión al área de Terminación. |
+
+Los movimientos no dependerán de que el mismo operario realice todos los registros. Cualquier operario habilitado podrá registrar el ingreso, traslado interno, devolución a depósito o pase a despacho de un material.
+
+El sistema almacenará el usuario que realizó cada registro, junto con la fecha, la hora, el origen, el destino y las observaciones correspondientes. De esta manera, será posible mantener la trazabilidad aunque intervengan operarios de diferentes turnos.
+
 ## Integrantes
 
 - Enzo Chavez
