@@ -194,6 +194,22 @@ La aplicación será web y responsive, permitiendo utilizarla desde computadora 
 
 Se prevé desplegar componentes del sistema en servicios online.
 
+## Relevamiento de infraestructura
+
+Se realizó un relevamiento inicial de la infraestructura necesaria para determinar la viabilidad del despliegue local del sistema.
+
+La empresa deberá proporcionar una computadora con componentes adecuados para ejecutar la aplicación. El equipo estará ubicado en el área de Terminación y podrá permanecer encendido durante todos los turnos de trabajo.
+
+La computadora se conectará mediante Wi-Fi a la red interna. El área de Terminación cuenta con cobertura estable y los celulares de los operarios podrán conectarse a la misma red para acceder a la aplicación.
+
+Se confirmó que la red interna continuará funcionando cuando la planta opere mediante generadores. También estará permitida la instalación de las tecnologías necesarias, incluyendo Java, PostgreSQL y la aplicación web.
+
+Un administrador designado será responsable de mantener el equipo en funcionamiento, administrar la aplicación y verificar que las copias de seguridad se ejecuten correctamente.
+
+Las copias de seguridad se realizarán automáticamente una vez por semana y podrán almacenarse en un servidor local destinado a respaldos. La configuración definitiva deberá garantizar que las copias no se almacenen únicamente en el mismo equipo donde se ejecuten la aplicación y la base de datos.
+
+Las características técnicas del equipo, como el sistema operativo, la memoria RAM, el procesador y el espacio de almacenamiento, se definirán antes de instalar la aplicación.
+
 ## Integrantes
 
 - Enzo Chavez
