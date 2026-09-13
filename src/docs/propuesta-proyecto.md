@@ -20,6 +20,21 @@ Según una estimación inicial basada en la experiencia de los operarios, la bú
 
 Esta información se considera una estimación preliminar. Durante el desarrollo del proyecto se realizará un registro semanal de los tiempos destinados a localizar materiales, con el objetivo de establecer una línea base y comparar posteriormente los resultados obtenidos con la utilización del sistema.
 
+## Objetivos
+
+### Objetivo general
+
+Desarrollar una aplicación web que permita mejorar la trazabilidad de materiales asociados a transformadores dentro del área de Terminación, registrando su ubicación actual y sus movimientos durante el proceso productivo.
+
+### Objetivos específicos
+
+- Reducir al menos un 50 % el tiempo promedio destinado a buscar materiales durante la prueba piloto, en comparación con la medición inicial.
+- Permitir consultar la ubicación actual de un material en menos de 2 minutos.
+- Registrar cada movimiento indicando el material, el transformador asociado, el origen, el destino, la fecha, la hora y el usuario que realizó el registro.
+- Mantener un historial de movimientos que permita reconstruir los cambios de ubicación de cada material.
+- Advertir al operario cuando intente registrar un material asociado a un transformador diferente.
+- Realizar una prueba piloto en el área de Terminación y registrar las observaciones de los operarios.
+
 ## Solución propuesta
 
 Desarrollar una aplicación web que permita registrar y consultar la ubicación de materiales asociados a transformadores dentro de áreas productivas.
