@@ -127,7 +127,7 @@ Quedan fuera del alcance inicial:
 
 El proyecto es técnicamente viable porque utilizará tecnologías conocidas por los integrantes: Java, Spring Boot, Spring Data JPA, PostgreSQL, HTML, CSS y JavaScript. La aplicación podrá ejecutarse en un equipo conectado a la red local y utilizarse desde los navegadores de las computadoras y dispositivos móviles autorizados.
 
-Será necesario confirmar la disponibilidad del equipo que funcionará como servidor, la cobertura de la red interna y el acceso desde los dispositivos utilizados en el área.
+El relevamiento de infraestructura confirmó que la empresa proporcionará un equipo para ejecutar el sistema, que el área posee cobertura Wi-Fi y que los dispositivos autorizados podrán acceder mediante la red interna.
 
 ### Viabilidad temporal
 
@@ -176,7 +176,7 @@ Se seleccionó el desarrollo de una aplicación web propia, ejecutada dentro de 
 - JavaScript
 
 ### Base de datos
-- MySQL
+- PostgreSQL
 
 ### API
 - REST
@@ -188,11 +188,17 @@ Se seleccionó el desarrollo de una aplicación web propia, ejecutada dentro de 
 - Git
 - GitHub
 
-## Plataforma
+## Plataforma y despliegue
 
-La aplicación será web y responsive, permitiendo utilizarla desde computadora y celular.
+La aplicación será web y responsive, permitiendo su utilización desde computadoras y celulares mediante un navegador.
 
-Se prevé desplegar componentes del sistema en servicios online.
+El sistema se desplegará en una computadora proporcionada por la empresa y ubicada en el área de Terminación. Los dispositivos autorizados accederán a la aplicación mediante la red interna de la fábrica.
+
+Este despliegue permitirá utilizar el sistema sin depender de una conexión permanente a Internet. La red interna y el equipo continuarán funcionando cuando la planta opere mediante generadores.
+
+Un administrador designado será responsable de mantener el equipo en funcionamiento y verificar las copias de seguridad automáticas semanales almacenadas en un servidor local diferente.
+
+La decisión se encuentra documentada en [ADR-005 — Despliegue web en red local](adr/ADR-005-despliegue-web-local.md).
 
 ## Relevamiento de infraestructura
 
