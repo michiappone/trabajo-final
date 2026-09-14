@@ -58,7 +58,17 @@ Permitirá registrar y consultar:
 ## Estructura del repositorio
 
 ```text
-backend/
-frontend/
-database/
-docs/
+trabajo-final/
+├── src/
+│   ├── backend/
+│   ├── database/
+│   ├── docs/
+│   │   ├── adr/
+│   │   ├── changelog.md
+│   │   ├── propuesta-proyecto.md
+│   │   └── roadmap.md
+│   ├── frontend/
+│   └── Main.java
+├── .gitignore
+└── README.md
+```

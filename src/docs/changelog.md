@@ -64,8 +64,9 @@ Este archivo registra los principales cambios, decisiones y avances realizados d
 ### Base de datos
 
 - Se reemplazó la elección inicial de MySQL por PostgreSQL.
-- Se actualizó la propuesta del proyecto para reflejar el uso de PostgreSQL.
-- La documentación técnica y los ADR deberán mantenerse coherentes con esta decisión.
+- Se marcó el `ADR-002` como reemplazado.
+- Se creó el `ADR-006` para documentar la utilización de PostgreSQL.
+- Se actualizaron la propuesta y el README para reflejar el cambio.
 
 ### Gestión del proyecto
 
