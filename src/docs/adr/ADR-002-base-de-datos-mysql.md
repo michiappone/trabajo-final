@@ -2,7 +2,7 @@
 
 ## Estado
 
-Aceptado
+Reemplazado por ADR-006
 
 ## Fecha
 
@@ -52,3 +52,7 @@ MySQL cubre las necesidades del proyecto y permite aprovechar conocimientos prev
 ## Consecuencias
 
 La persistencia del backend se implementará sobre MySQL utilizando Spring Data JPA y Hibernate.
+
+## Decisión reemplazada
+
+La decisión de utilizar MySQL fue reemplazada el 13/09/2026 por el [ADR-006 — PostgreSQL como base de datos](ADR-006-base-de-datos-postgresql.md).

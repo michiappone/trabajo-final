@@ -45,7 +45,7 @@ Permitirá registrar y consultar:
 - JavaScript
 
 ### Base de datos
-- MySQL
+- PostgreSQL
 
 ### API y documentación
 - REST
