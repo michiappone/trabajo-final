@@ -95,3 +95,15 @@ Este archivo registra los principales cambios, decisiones y avances realizados d
 - Se agregaron enlaces desde la propuesta hacia los ADR correspondientes.
 - Se corrigió la descripción de la identificación UN, aclarando que se encuentra grabada en los materiales según el estándar del proveedor y no es generada por el sistema.
 - Se revisó la consistencia entre la propuesta del proyecto y las decisiones registradas en los ADR.
+
+### Semana 2 — Requisitos y casos de uso
+
+- Se documentaron los requisitos funcionales de la primera versión del sistema.
+- Se documentaron los requisitos no funcionales.
+- Se definieron las reglas de negocio relacionadas con materiales, transformadores, ubicaciones, movimientos y códigos QR.
+- Se aclaró como regla de negocio que la identificación UN proviene del estándar del proveedor y no es generada por el sistema.
+- Se elaboraron los principales casos de uso para administradores y operarios.
+- Se incorporaron criterios de aceptación para cada caso de uso.
+- Se definió la actualización de la ubicación actual del material a partir del registro de movimientos.
+- Se documentó el funcionamiento de las advertencias cuando un material corresponde a otro transformador.
+- Se realizó una revisión integral de la propuesta y se verificó su consistencia con los requisitos definidos.

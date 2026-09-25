@@ -17,9 +17,11 @@ El proyecto propone desarrollar una aplicación web para mejorar la trazabilidad
 ### Documentación
 
 - [Propuesta del proyecto](src/docs/propuesta-proyecto.md)
+- [Requisitos del sistema](src/docs/requisitos.md)
+- [Casos de uso](src/docs/casos-de-uso.md)
 - [Roadmap](src/docs/roadmap.md)
 - [Registro general de cambios](src/docs/changelog.md)
-- Decisiones de arquitectura (ADR): `src/docs/adr/`
+- ADR: `src/docs/adr/`
 
 ## Integrantes
 
@@ -86,8 +88,10 @@ trabajo-final/
 │   ├── database/
 │   ├── docs/
 │   │   ├── adr/
+│   │   ├── casos-de-uso.md
 │   │   ├── changelog.md
 │   │   ├── propuesta-proyecto.md
+│   │   ├── requisitos.md
 │   │   └── roadmap.md
 │   ├── frontend/
 │   └── Main.java
