@@ -2,7 +2,24 @@
 
 ## Sistema web de trazabilidad de materiales en áreas productivas
 
-Proyecto desarrollado como Trabajo Final Integrador de la Tecnicatura Universitaria en Programación.
+Repositorio correspondiente al Trabajo Final Integrador de la Tecnicatura Universitaria en Programación.
+
+El proyecto propone desarrollar una aplicación web para mejorar la trazabilidad de materiales asociados a transformadores dentro de áreas productivas, utilizando el área de Terminación como caso principal.
+
+## Índice del repositorio
+
+### Código fuente
+
+- Backend: `src/backend/`
+- Frontend: `src/frontend/`
+- Base de datos: `src/database/`
+
+### Documentación
+
+- [Propuesta del proyecto](src/docs/propuesta-proyecto.md)
+- [Roadmap](src/docs/roadmap.md)
+- [Registro general de cambios](src/docs/changelog.md)
+- Decisiones de arquitectura (ADR): `src/docs/adr/`
 
 ## Integrantes
 
@@ -15,24 +32,25 @@ Proyecto desarrollado como Trabajo Final Integrador de la Tecnicatura Universita
 
 ## Descripción
 
-El proyecto propone desarrollar una aplicación web destinada a mejorar la trazabilidad de materiales asociados a transformadores dentro de áreas productivas.
+La aplicación permitirá registrar y consultar:
 
-El sistema utilizará el área de Terminación como caso principal de aplicación, aunque estará diseñado para poder extenderse posteriormente a otras áreas como Bobinado, Montaje Parte Activa o Preestabilizado.
-
-Permitirá registrar y consultar:
-
-- Transformadores y números UN.
+- Transformadores.
 - Materiales asociados.
+- Identificación UN existente en cada material.
 - Ubicaciones principales y temporales.
 - Movimientos de materiales.
-- Observaciones pendientes.
-- Materiales utilizados temporalmente en otros transformadores.
+- Observaciones.
 - Historial de movimientos.
-- Consulta y registro mediante códigos QR en ubicaciones.
+- Ubicaciones mediante códigos QR.
+
+La identificación UN no será generada por la aplicación. Corresponde a una identificación grabada físicamente en cada material según el estándar del proveedor.
+
+La primera versión estará enfocada en el área de Terminación y funcionará dentro de la red local de la fábrica.
 
 ## Tecnologías previstas
 
 ### Backend
+
 - Java
 - Spring Boot
 - Spring Web
@@ -40,18 +58,22 @@ Permitirá registrar y consultar:
 - Hibernate
 
 ### Frontend
+
 - HTML
 - CSS
 - JavaScript
 
 ### Base de datos
+
 - PostgreSQL
 
 ### API y documentación
+
 - REST
 - Swagger / OpenAPI
 
 ### Control de versiones
+
 - Git
 - GitHub
 

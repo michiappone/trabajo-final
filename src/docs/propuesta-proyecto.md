@@ -1,5 +1,25 @@
 # Propuesta de Proyecto
 
+## Índice
+
+- [Nombre del proyecto](#nombre-del-proyecto)
+- [Problema](#problema)
+- [Objetivos](#objetivos)
+- [Solución propuesta](#solución-propuesta)
+- [Caso principal](#caso-principal)
+- [Usuarios](#usuarios)
+- [Alcance](#alcance)
+- [Análisis de viabilidad](#análisis-de-viabilidad)
+- [Alternativas consideradas](#alternativas-consideradas)
+- [Soluciones existentes en el mercado](#soluciones-existentes-en-el-mercado)
+- [Comparación de alternativas](#comparación-de-alternativas)
+- [Tecnologías](#tecnologías)
+- [Plataforma y despliegue](#plataforma-y-despliegue)
+- [Relevamiento de infraestructura](#relevamiento-de-infraestructura)
+- [Riesgos y medidas de mitigación](#riesgos-y-medidas-de-mitigación)
+- [Integrantes](#integrantes)
+- [Tutor](#tutor)
+
 ## Nombre del proyecto
 
 Sistema web de trazabilidad de materiales en áreas productivas.
@@ -39,17 +59,32 @@ Desarrollar una aplicación web que permita mejorar la trazabilidad de materiale
 
 Desarrollar una aplicación web que permita registrar y consultar la ubicación de materiales asociados a transformadores dentro de áreas productivas.
 
+La elección de una aplicación web se encuentra documentada en el [ADR-001 — Aplicación web](adr/ADR-001-arquitectura-web.md).
+
 Cada transformador contará con:
 
 - Código identificador.
-- Número UN.
 - Materiales asociados.
-- Ubicación principal.
+- Ubicación principal asignada para sus materiales.
+
+Cada material podrá registrar, entre otros datos:
+
+- Tipo o descripción del material.
+- Identificación UN.
+- Transformador al que se encuentra asociado.
+- Ubicación actual.
 - Historial de movimientos.
+- Observaciones.
 
-También existirán ubicaciones temporales para almacenar materiales separados del transformador.
+La UN es una identificación que ya se encuentra grabada físicamente en el material según el estándar definido por el proveedor.
 
-Estas ubicaciones podrán identificarse mediante códigos QR.
+El sistema no generará ni asignará esta identificación, sino que registrará la UN existente para utilizarla como parte de la trazabilidad del material.
+
+También existirán ubicaciones temporales para almacenar materiales que se encuentren separados momentáneamente de su transformador.
+
+Las ubicaciones podrán identificarse mediante códigos QR para facilitar la consulta y el registro de movimientos.
+
+La decisión de utilizar códigos QR en las ubicaciones y no individualmente sobre cada material se encuentra documentada en el [ADR-004 — Uso de códigos QR](adr/ADR-004-uso-de-qr.md).
 
 ## Caso principal
 
@@ -71,8 +106,7 @@ Podrá gestionar:
 - Áreas.
 - Ubicaciones.
 - Transformadores.
-- Números UN.
-- Materiales.
+- Materiales y registro de su identificación UN.
 - Usuarios.
 
 ### Operario
@@ -94,8 +128,9 @@ La primera versión del sistema estará enfocada en la trazabilidad de materiale
 ### Funcionalidades incluidas
 
 - Gestión de áreas y ubicaciones.
-- Gestión de transformadores y números UN.
+- Gestión de transformadores.
 - Registro de materiales asociados a cada transformador.
+- Registro de la identificación UN existente en cada material.
 - Consulta de la ubicación actual de los materiales.
 - Registro de ingresos, traslados internos, devoluciones a depósito y pases a despacho.
 - Registro del usuario que realizó cada movimiento.
@@ -125,20 +160,31 @@ Quedan fuera del alcance inicial:
 
 ### Viabilidad técnica
 
-El proyecto es técnicamente viable porque utilizará tecnologías conocidas por los integrantes: Java, Spring Boot, Spring Data JPA, PostgreSQL, HTML, CSS y JavaScript. La aplicación podrá ejecutarse en un equipo conectado a la red local y utilizarse desde los navegadores de las computadoras y dispositivos móviles autorizados.
+El proyecto es técnicamente viable porque utilizará tecnologías conocidas por los integrantes: Java, Spring Boot, Spring Data JPA, PostgreSQL, HTML, CSS y JavaScript.
+
+La aplicación podrá ejecutarse en un equipo conectado a la red local y utilizarse desde los navegadores de las computadoras y dispositivos móviles autorizados.
 
 El relevamiento de infraestructura confirmó que la empresa proporcionará un equipo para ejecutar el sistema, que el área posee cobertura Wi-Fi y que los dispositivos autorizados podrán acceder mediante la red interna.
 
+Las principales decisiones técnicas se encuentran documentadas mediante ADR dentro del repositorio.
+
 ### Viabilidad temporal
 
-El proyecto se desarrollará durante doce semanas. La primera versión se limitará al área de Terminación y a las funciones esenciales de trazabilidad, lo que permite mantener un alcance compatible con el tiempo disponible.
+El proyecto se desarrollará durante doce semanas.
+
+La primera versión se limitará al área de Terminación y a las funciones esenciales de trazabilidad, lo que permite mantener un alcance compatible con el tiempo disponible.
+
+La planificación y las fechas estimadas se encuentran detalladas en el [Roadmap del proyecto](roadmap.md).
 
 ### Viabilidad del dominio
 
-Michael trabaja en la planta y posee acceso al área en la que se presenta el problema. Esto permite observar el proceso, consultar a los operarios y validar el funcionamiento del sistema mediante una prueba piloto.
+Uno de los integrantes trabaja en la planta y posee acceso al área en la que se presenta el problema.
 
+Esto permite observar el proceso productivo, consultar a los operarios y validar el funcionamiento del sistema mediante una prueba piloto.
 
 ## Alternativas consideradas
+
+Durante el análisis inicial se evaluaron diferentes formas de resolver el problema.
 
 ### Registros manuales
 
@@ -146,73 +192,141 @@ El uso de planillas en papel tiene un costo inicial bajo, pero dificulta la actu
 
 ### Archivos Excel o CSV
 
-Permiten registrar información de manera sencilla, pero pueden producir versiones duplicadas, modificaciones simultáneas y dificultades para conocer la ubicación actual de cada material. Los archivos CSV o Excel podrán considerarse en el futuro como mecanismo de importación o contingencia.
+Permiten registrar información de manera sencilla, pero pueden producir versiones duplicadas, modificaciones simultáneas y dificultades para conocer la ubicación actual de cada material.
 
-### Software comercial de gestión
-
-Existen sistemas empresariales de inventario y trazabilidad, pero suelen estar orientados al control general de stock y pueden requerir costos de licencia, infraestructura adicional o una adaptación compleja al proceso específico de la fábrica.
+Los archivos CSV o Excel podrán considerarse en el futuro como mecanismo de importación o contingencia, pero no como solución principal de trazabilidad.
 
 ### Aplicación móvil nativa
 
-Podría facilitar el uso desde celulares, pero requeriría mantener una aplicación diferente para cada plataforma. Una aplicación web responsive permite utilizar el sistema desde computadoras y celulares mediante un navegador.
+Una aplicación móvil permitiría utilizar el sistema directamente desde los celulares de los operarios.
 
-### Alternativa seleccionada
+Sin embargo, implicaría desarrollar y mantener una aplicación específica para dispositivos móviles, mientras que también sería necesario disponer de acceso desde las computadoras del área.
 
-Se seleccionó el desarrollo de una aplicación web propia, ejecutada dentro de la red local, porque puede adaptarse al proceso de la fábrica y no requiere una conexión permanente a Internet.
+Por este motivo se optó por una aplicación web responsive, decisión documentada en el [ADR-001 — Aplicación web](adr/ADR-001-arquitectura-web.md).
 
+### Aplicación web propia
+
+Permite disponer de una única aplicación accesible desde computadoras y celulares mediante un navegador.
+
+Además, puede diseñarse específicamente para el proceso de la planta y ejecutarse dentro de la red local.
+
+Esta fue la alternativa seleccionada.
+
+## Soluciones existentes en el mercado
+
+También se consideró la existencia de sistemas comerciales orientados a inventario, depósitos, gestión de activos y trazabilidad.
+
+Estas herramientas pueden ofrecer funcionalidades como:
+
+- Registro de productos o activos.
+- Gestión de stock.
+- Seguimiento de movimientos.
+- Historial de operaciones.
+- Identificación mediante códigos de barras o QR.
+- Gestión de depósitos y ubicaciones.
+
+Sin embargo, este tipo de soluciones suele estar diseñado para procesos generales de inventario o almacenamiento y puede requerir configuración, integración con otros sistemas, infraestructura adicional o adaptación al proceso específico de la planta.
+
+El objetivo de este proyecto no es desarrollar un sistema general de gestión de stock, sino resolver específicamente el problema de conocer la ubicación y el historial de materiales asociados a cada transformador durante el proceso productivo.
+
+## Comparación de alternativas
+
+| Alternativa | Registro centralizado | Historial de movimientos | Acceso desde PC y celular | Adaptación al proceso de la planta | Dependencia de Internet |
+|---|---|---|---|---|---|
+| Registros manuales | No | Limitado | No | Alta | No |
+| Excel / CSV | Parcial | Limitado | Parcial | Media | No necesariamente |
+| Aplicación móvil nativa | Sí | Sí | Principalmente celular | Alta | Depende del despliegue |
+| Software comercial de inventario o trazabilidad | Sí | Generalmente sí | Depende de la solución | Requiere configuración o adaptación | Depende de la solución |
+| Aplicación web propuesta | Sí | Sí | Sí | Diseñada para el proceso | No |
+
+### Conclusión
+
+Se seleccionó el desarrollo de una aplicación web propia porque permite adaptar el sistema directamente al proceso de trabajo de la planta y utilizarlo tanto desde computadoras como desde dispositivos móviles.
+
+Frente al procedimiento utilizado actualmente, permitirá centralizar la información, consultar la ubicación actual de los materiales y conservar un historial de movimientos.
+
+En comparación con soluciones comerciales de inventario o trazabilidad, la propuesta tendrá un alcance específico, centrado en los materiales asociados a transformadores y en las necesidades concretas del área de Terminación.
+
+Además, podrá ejecutarse dentro de la infraestructura existente de la fábrica sin depender de una conexión permanente a Internet.
 
 ## Tecnologías
 
 ### Backend
-- Java
-- Spring Boot
-- Spring Web
-- Spring Data JPA
-- Hibernate
+
+- Java.
+- Spring Boot.
+- Spring Web.
+- Spring Data JPA.
+- Hibernate.
+
+La elección de Java y Spring Boot para el backend se encuentra documentada en el [ADR-003 — Stack backend](adr/ADR-003-stack-backend.md).
 
 ### Frontend
-- HTML
-- CSS
-- JavaScript
+
+- HTML.
+- CSS.
+- JavaScript.
+
+La decisión de utilizar una interfaz web responsive se encuentra documentada en el [ADR-001 — Aplicación web](adr/ADR-001-arquitectura-web.md).
 
 ### Base de datos
-- PostgreSQL
+
+- PostgreSQL.
+
+La elección de PostgreSQL se encuentra documentada en el [ADR-006 — PostgreSQL](adr/ADR-006-base-de-datos-postgresql.md), que reemplaza la decisión inicial de utilizar MySQL registrada en el [ADR-002 — MySQL](adr/ADR-002-base-de-datos-mysql.md).
 
 ### API
-- REST
 
-### Documentación
-- Swagger / OpenAPI
+- REST.
+
+### Documentación de la API
+
+- Swagger / OpenAPI.
 
 ### Control de versiones
-- Git
-- GitHub
+
+- Git.
+- GitHub.
 
 ## Plataforma y despliegue
 
 La aplicación será web y responsive, permitiendo su utilización desde computadoras y celulares mediante un navegador.
 
-El sistema se desplegará en una computadora proporcionada por la empresa y ubicada en el área de Terminación. Los dispositivos autorizados accederán a la aplicación mediante la red interna de la fábrica.
+La elección de una aplicación web responsive se encuentra documentada en el [ADR-001 — Aplicación web](adr/ADR-001-arquitectura-web.md).
 
-Este despliegue permitirá utilizar el sistema sin depender de una conexión permanente a Internet. La red interna y el equipo continuarán funcionando cuando la planta opere mediante generadores.
+El sistema se desplegará en una computadora proporcionada por la empresa y ubicada en el área de Terminación.
+
+Los dispositivos autorizados accederán a la aplicación mediante la red interna de la fábrica.
+
+Este despliegue permitirá utilizar el sistema sin depender de una conexión permanente a Internet.
+
+La red interna y el equipo continuarán funcionando cuando la planta opere mediante generadores.
 
 Un administrador designado será responsable de mantener el equipo en funcionamiento y verificar las copias de seguridad automáticas semanales almacenadas en un servidor local diferente.
 
-La decisión se encuentra documentada en [ADR-005 — Despliegue web en red local](adr/ADR-005-despliegue-web-local.md).
+La decisión de despliegue se encuentra documentada en el [ADR-005 — Despliegue web local](adr/ADR-005-despliegue-web-local.md).
 
 ## Relevamiento de infraestructura
 
 Se realizó un relevamiento inicial de la infraestructura necesaria para determinar la viabilidad del despliegue local del sistema.
 
-La empresa deberá proporcionar una computadora con componentes adecuados para ejecutar la aplicación. El equipo estará ubicado en el área de Terminación y podrá permanecer encendido durante todos los turnos de trabajo.
+La empresa deberá proporcionar una computadora con componentes adecuados para ejecutar la aplicación.
 
-La computadora se conectará mediante Wi-Fi a la red interna. El área de Terminación cuenta con cobertura estable y los celulares de los operarios podrán conectarse a la misma red para acceder a la aplicación.
+El equipo estará ubicado en el área de Terminación y podrá permanecer encendido durante todos los turnos de trabajo.
 
-Se confirmó que la red interna continuará funcionando cuando la planta opere mediante generadores. También estará permitida la instalación de las tecnologías necesarias, incluyendo Java, PostgreSQL y la aplicación web.
+La computadora se conectará mediante Wi-Fi a la red interna.
+
+El área de Terminación cuenta con cobertura estable y los celulares de los operarios podrán conectarse a la misma red para acceder a la aplicación.
+
+Se confirmó que la red interna continuará funcionando cuando la planta opere mediante generadores.
+
+También estará permitida la instalación de las tecnologías necesarias, incluyendo Java, PostgreSQL y la aplicación web.
 
 Un administrador designado será responsable de mantener el equipo en funcionamiento, administrar la aplicación y verificar que las copias de seguridad se ejecuten correctamente.
 
-Las copias de seguridad se realizarán automáticamente una vez por semana y podrán almacenarse en un servidor local destinado a respaldos. La configuración definitiva deberá garantizar que las copias no se almacenen únicamente en el mismo equipo donde se ejecuten la aplicación y la base de datos.
+Las copias de seguridad se realizarán automáticamente una vez por semana y se almacenarán en un servidor local destinado a respaldos.
+
+La configuración deberá garantizar que las copias no se almacenen en el mismo equipo donde se ejecuten la aplicación y la base de datos.
 
 Las características técnicas del equipo, como el sistema operativo, la memoria RAM, el procesador y el espacio de almacenamiento, se definirán antes de instalar la aplicación.
 
@@ -230,15 +344,19 @@ Las características técnicas del equipo, como el sistema operativo, la memoria
 | Resistencia al uso del sistema | Diseñar pantallas sencillas y realizar una prueba piloto con operarios. |
 | Ampliación excesiva del alcance | Limitar la primera versión al área de Terminación. |
 
-Los movimientos no dependerán de que el mismo operario realice todos los registros. Cualquier operario habilitado podrá registrar el ingreso, traslado interno, devolución a depósito o pase a despacho de un material.
+Los movimientos no dependerán de que el mismo operario realice todos los registros.
 
-El sistema almacenará el usuario que realizó cada registro, junto con la fecha, la hora, el origen, el destino y las observaciones correspondientes. De esta manera, será posible mantener la trazabilidad aunque intervengan operarios de diferentes turnos.
+Cualquier operario habilitado podrá registrar el ingreso, traslado interno, devolución a depósito o pase a despacho de un material.
+
+El sistema almacenará el usuario que realizó cada registro, junto con la fecha, la hora, el origen, el destino y las observaciones correspondientes.
+
+De esta manera, será posible mantener la trazabilidad aunque intervengan operarios de diferentes turnos.
 
 ## Integrantes
 
-- Enzo Chavez
-- Michael Chiappone
+- Enzo Chavez.
+- Michael Chiappone.
 
 ## Tutor
 
-- Santiago Fonzo
+- Santiago Fonzo.

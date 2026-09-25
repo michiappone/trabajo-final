@@ -2,6 +2,12 @@
 
 Este archivo registra los principales cambios, decisiones y avances realizados durante el proyecto.
 
+## Índice
+
+- [30/08/2026](#30082026)
+- [13/09/2026](#13092026)
+- [25/09/2026](#25092026)
+
 ## 30/08/2026
 
 ### Definición inicial
@@ -75,3 +81,17 @@ Este archivo registra los principales cambios, decisiones y avances realizados d
 - Se estableció que los responsables, revisores y estados se administrarán desde Trello.
 - Se creó el tablero de Trello para registrar el avance y las evidencias.
 - Se estableció la elaboración de un reporte semanal.
+
+## 25/09/2026
+
+### Revisión de documentación
+
+- Se aplicaron las observaciones recibidas sobre la documentación de la Semana 1.
+- Se reorganizó el README principal para utilizarlo como presentación e índice del repositorio.
+- Se incorporaron índices internos en la documentación.
+- Se separaron las alternativas consideradas de las soluciones existentes en el mercado.
+- Se agregó un cuadro comparativo de alternativas.
+- Se incorporó una conclusión sobre la solución seleccionada.
+- Se agregaron enlaces desde la propuesta hacia los ADR correspondientes.
+- Se corrigió la descripción de la identificación UN, aclarando que se encuentra grabada en los materiales según el estándar del proveedor y no es generada por el sistema.
+- Se revisó la consistencia entre la propuesta del proyecto y las decisiones registradas en los ADR.

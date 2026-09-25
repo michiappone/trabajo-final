@@ -4,6 +4,23 @@ Las fechas y duraciones indicadas son estimativas y podrán modificarse según e
 
 Los responsables, revisores y estados actualizados de cada tarea se registrarán en el tablero de Trello.
 
+## Índice
+
+- [Etapa inicial — Propuesta preliminar](#etapa-inicial--propuesta-preliminar)
+- [Semana 1 — Corrección y ampliación de la propuesta](#semana-1--corrección-y-ampliación-de-la-propuesta)
+- [Semana 2 — Requisitos y casos de uso](#semana-2--requisitos-y-casos-de-uso)
+- [Semana 3 — Modelo de datos y arquitectura](#semana-3--modelo-de-datos-y-arquitectura)
+- [Semana 4 — Diseño de interfaces](#semana-4--diseño-de-interfaces)
+- [Semana 5 — Preparación técnica](#semana-5--preparación-técnica)
+- [Semana 6 — Usuarios, autenticación y transformadores](#semana-6--usuarios-autenticación-y-transformadores)
+- [Semana 7 — Materiales y ubicaciones](#semana-7--materiales-y-ubicaciones)
+- [Semana 8 — Movimientos e historial](#semana-8--movimientos-e-historial)
+- [Semana 9 — Frontend e integración QR](#semana-9--frontend-e-integración-qr)
+- [Semana 10 — Pruebas y respaldos](#semana-10--pruebas-y-respaldos)
+- [Semana 11 — Prueba piloto](#semana-11--prueba-piloto)
+- [Semana 12 — Correcciones y entrega final](#semana-12--correcciones-y-entrega-final)
+- [Seguimiento semanal](#seguimiento-semanal)
+
 ## Etapa inicial — Propuesta preliminar
 
 **Período: 10/08/2026 al 30/08/2026**
