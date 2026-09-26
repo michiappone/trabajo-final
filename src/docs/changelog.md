@@ -126,3 +126,4 @@ Este archivo registra los principales cambios, decisiones y avances realizados d
 - Se revisó la arquitectura de despliegue dentro de la red local.
 - Se creó el ADR-007 para documentar el uso conjunto de ubicación actual e historial de movimientos.
 - Se definió que el registro de un movimiento y la actualización de la ubicación actual deberán realizarse dentro de una misma operación transaccional.
+- Se documentaron los módulos funcionales previstos para el desarrollo del sistema.

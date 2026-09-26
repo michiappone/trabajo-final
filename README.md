@@ -23,6 +23,7 @@ El proyecto propone desarrollar una aplicación web para mejorar la trazabilidad
 - [Arquitectura del sistema](src/docs/arquitectura.md)
 - [Roadmap](src/docs/roadmap.md)
 - [Registro general de cambios](src/docs/changelog.md)
+- - [Módulos del sistema](src/docs/modulos.md)
 - ADR: `src/docs/adr/`
 
 ## Integrantes
