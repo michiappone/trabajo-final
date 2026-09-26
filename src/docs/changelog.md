@@ -7,6 +7,7 @@ Este archivo registra los principales cambios, decisiones y avances realizados d
 - [30/08/2026](#30082026)
 - [13/09/2026](#13092026)
 - [25/09/2026](#25092026)
+- [26/09/2026](#26092026)
 
 ## 30/08/2026
 
@@ -107,3 +108,22 @@ Este archivo registra los principales cambios, decisiones y avances realizados d
 - Se definió la actualización de la ubicación actual del material a partir del registro de movimientos.
 - Se documentó el funcionamiento de las advertencias cuando un material corresponde a otro transformador.
 - Se realizó una revisión integral de la propuesta y se verificó su consistencia con los requisitos definidos.
+
+## 26/09/2026
+
+### Semana 3 — Modelo de datos y arquitectura
+
+- Se diseñó el modelo de datos inicial del sistema.
+- Se definieron las entidades Usuario, Área, Ubicación, Transformador, Material, Movimiento y Observación.
+- Se definió que el número real del transformador será utilizado directamente como identificador del sistema.
+- Se estableció que cada transformador posee una identificación de proveedor única compartida por todos sus materiales.
+- Se contemplaron identificaciones alfanuméricas como UN20 y K486.
+- Se ubicó la identificación del proveedor en la entidad Transformador para evitar duplicación de datos en los materiales.
+- Se documentaron las relaciones y cardinalidades entre las entidades.
+- Se elaboraron el diagrama entidad-relación y el diagrama de clases.
+- Se documentó la arquitectura web por capas del sistema.
+- Se documentó el flujo entre frontend, API REST, servicios, repositorios y PostgreSQL.
+- Se revisó la arquitectura de despliegue dentro de la red local.
+- Se creó el ADR-007 para documentar el uso conjunto de ubicación actual e historial de movimientos.
+- Se definió que el registro de un movimiento y la actualización de la ubicación actual deberán realizarse dentro de una misma operación transaccional.
+- Se documentaron los módulos funcionales previstos para el desarrollo del sistema.

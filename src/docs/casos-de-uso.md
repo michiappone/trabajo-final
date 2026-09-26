@@ -20,7 +20,7 @@
 
 ### Administrador
 
-Usuario responsable de administrar la información principal y configuración del sistema.
+Usuario responsable de administrar la información principal y la configuración del sistema.
 
 ### Operario
 
@@ -30,91 +30,57 @@ Usuario que consulta información y registra movimientos durante el proceso prod
 
 **Actor principal:** Administrador u Operario.
 
-**Objetivo:** Permitir que un usuario habilitado acceda al sistema con su identidad y rol correspondiente.
+**Objetivo:** Permitir que un usuario habilitado acceda al sistema.
 
-**Precondiciones:**
+**Precondición:**
 
-- El usuario debe encontrarse registrado y habilitado.
+El usuario debe encontrarse registrado y habilitado.
 
 **Flujo principal:**
 
 1. El usuario accede a la aplicación.
 2. El sistema solicita sus credenciales.
-3. El usuario ingresa los datos requeridos.
+3. El usuario ingresa los datos.
 4. El sistema valida las credenciales.
-5. El sistema identifica el rol del usuario.
-6. El sistema permite el acceso a las funciones correspondientes.
-
-**Flujo alternativo:**
-
-- Si las credenciales son incorrectas, el sistema informa que no fue posible iniciar sesión.
-
-**Postcondición:**
-
-- El usuario queda identificado dentro del sistema.
+5. El sistema identifica el rol.
+6. El sistema permite el acceso.
 
 ### Criterios de aceptación
 
-- Dado un usuario registrado y habilitado, cuando ingresa credenciales válidas, entonces el sistema permite el acceso.
-- Dadas credenciales inválidas, cuando se intenta iniciar sesión, entonces el sistema rechaza el acceso.
-- Dado un usuario autenticado, el sistema deberá aplicar los permisos correspondientes a su rol.
+- Un usuario habilitado con credenciales válidas deberá poder ingresar.
+- Las credenciales inválidas deberán ser rechazadas.
+- Las funcionalidades disponibles dependerán del rol.
 
 ## CU-02 — Gestionar usuarios
 
 **Actor principal:** Administrador.
 
-**Objetivo:** Registrar y administrar los usuarios habilitados para utilizar el sistema.
-
-**Precondiciones:**
-
-- El administrador debe haber iniciado sesión.
-
-**Flujo principal:**
-
-1. El administrador accede a la gestión de usuarios.
-2. El sistema muestra los usuarios registrados.
-3. El administrador selecciona la operación que desea realizar.
-4. El administrador completa o modifica los datos.
-5. El sistema valida la información.
-6. El sistema guarda los cambios.
-
-**Postcondición:**
-
-- La información del usuario queda actualizada.
+**Objetivo:** Registrar y administrar usuarios.
 
 ### Criterios de aceptación
 
-- Solo los usuarios con rol de administrador podrán acceder a la gestión de usuarios.
-- Los usuarios creados deberán quedar asociados a un rol.
-- El sistema deberá impedir guardar un usuario cuando falten datos obligatorios.
+- Solo un administrador podrá gestionar usuarios.
+- Todo usuario deberá poseer un rol.
+- No se podrán guardar usuarios si faltan datos obligatorios.
 
 ## CU-03 — Gestionar ubicaciones
 
 **Actor principal:** Administrador.
 
-**Objetivo:** Registrar y administrar las ubicaciones físicas utilizadas para la trazabilidad.
-
-**Precondiciones:**
-
-- El administrador debe haber iniciado sesión.
+**Objetivo:** Registrar y administrar ubicaciones físicas.
 
 **Flujo principal:**
 
 1. El administrador accede a la gestión de ubicaciones.
-2. El sistema muestra las ubicaciones registradas.
-3. El administrador registra o modifica una ubicación.
-4. El sistema valida la información.
-5. El sistema guarda los cambios.
-
-**Postcondición:**
-
-- La ubicación queda disponible para ser utilizada en los movimientos de materiales.
+2. Registra o modifica una ubicación.
+3. El sistema valida los datos.
+4. El sistema guarda la información.
 
 ### Criterios de aceptación
 
-- Cada ubicación deberá poder identificarse de forma inequívoca dentro del sistema.
-- Las ubicaciones deberán poder asociarse al área correspondiente.
-- Solo un administrador podrá gestionar ubicaciones.
+- Cada ubicación deberá poder identificarse dentro del sistema.
+- Cada ubicación deberá pertenecer a un área.
+- Solo el administrador podrá gestionar ubicaciones.
 
 ## CU-04 — Gestionar transformadores
 
@@ -122,59 +88,65 @@ Usuario que consulta información y registra movimientos durante el proceso prod
 
 **Objetivo:** Registrar y mantener actualizados los transformadores utilizados en el proceso.
 
-**Precondiciones:**
+**Precondición:**
 
-- El administrador debe haber iniciado sesión.
+El administrador debe haber iniciado sesión.
 
 **Flujo principal:**
 
 1. El administrador accede a la gestión de transformadores.
 2. El sistema muestra los transformadores registrados.
-3. El administrador registra o modifica un transformador.
-4. El sistema valida su código identificador.
-5. El sistema guarda los cambios.
+3. El administrador selecciona registrar un nuevo transformador.
+4. Ingresa el número real del transformador, por ejemplo 6682.
+5. Ingresa la identificación proporcionada por el proveedor, por ejemplo UN20 o K486.
+6. Selecciona la ubicación principal correspondiente.
+7. El sistema valida los datos.
+8. El sistema registra el transformador.
 
 **Postcondición:**
 
-- El transformador queda disponible para asociar materiales.
+El transformador queda disponible para asociar materiales.
 
 ### Criterios de aceptación
 
-- Cada transformador deberá contar con un código identificador.
-- El sistema deberá permitir consultar sus materiales asociados.
-- Solo un administrador podrá registrar o modificar transformadores.
+- El número real del transformador deberá utilizarse como identificador.
+- No deberá existir más de un transformador con el mismo número.
+- Cada transformador deberá tener una identificación de proveedor asociada.
+- La identificación del proveedor deberá almacenarse como texto.
+- La identificación del proveedor deberá ser única para cada transformador.
+- No se deberá generar automáticamente dicha identificación.
 
 ## CU-05 — Registrar material
 
 **Actor principal:** Administrador.
 
-**Objetivo:** Registrar un material y asociarlo con el transformador al cual corresponde.
+**Objetivo:** Registrar un material y asociarlo con el transformador al cual pertenece.
 
 **Precondiciones:**
 
 - El administrador debe haber iniciado sesión.
-- El transformador debe encontrarse registrado.
+- El transformador debe estar registrado.
 
 **Flujo principal:**
 
 1. El administrador selecciona la opción para registrar un material.
 2. El sistema solicita los datos del material.
-3. El administrador ingresa su descripción o tipo.
-4. El administrador registra la identificación UN grabada físicamente en el material.
-5. El administrador selecciona el transformador correspondiente.
+3. El administrador ingresa el tipo o descripción.
+4. El administrador selecciona el transformador correspondiente.
+5. El sistema muestra la identificación del proveedor asociada a ese transformador.
 6. El sistema valida los datos.
 7. El sistema registra el material.
 
 **Postcondición:**
 
-- El material queda registrado y asociado al transformador seleccionado.
+El material queda asociado al transformador seleccionado.
 
 ### Criterios de aceptación
 
-- El sistema no deberá generar automáticamente la identificación UN.
-- La UN registrada deberá corresponder al dato ingresado por el administrador.
-- El material deberá quedar asociado a un transformador.
-- No deberá permitirse guardar el material cuando falten datos obligatorios.
+- Todo material deberá pertenecer a un transformador.
+- La identificación del proveedor no deberá ingresarse nuevamente para cada material.
+- La identificación deberá obtenerse a partir del transformador asociado.
+- No deberá permitirse guardar un material cuando falten datos obligatorios.
 
 ## CU-06 — Consultar transformador y materiales
 
@@ -182,55 +154,41 @@ Usuario que consulta información y registra movimientos durante el proceso prod
 
 **Objetivo:** Consultar los materiales correspondientes a un transformador.
 
-**Precondiciones:**
-
-- El usuario debe encontrarse identificado en el sistema.
-- El transformador debe estar registrado.
-
 **Flujo principal:**
 
 1. El usuario accede al listado de transformadores.
-2. El sistema muestra los transformadores disponibles.
-3. El usuario selecciona un transformador.
-4. El sistema muestra los materiales asociados.
-5. El sistema muestra la ubicación actual conocida de cada material.
-
-**Postcondición:**
-
-- No se modifica información.
+2. Selecciona un transformador.
+3. El sistema muestra su número identificador.
+4. El sistema muestra su identificación de proveedor.
+5. El sistema muestra los materiales asociados.
+6. Para cada material muestra su ubicación actual conocida.
 
 ### Criterios de aceptación
 
-- El sistema deberá mostrar los materiales asociados al transformador seleccionado.
-- Para cada material deberá mostrarse su ubicación actual conocida.
-- La consulta deberá estar disponible para administradores y operarios.
+- Deberá mostrarse el número del transformador.
+- Deberá mostrarse la identificación del proveedor.
+- Deberán mostrarse los materiales asociados.
+- Cada material deberá mostrar su ubicación actual conocida.
 
 ## CU-07 — Consultar ubicación de un material
 
 **Actor principal:** Administrador u Operario.
 
-**Objetivo:** Conocer rápidamente la ubicación actual de un material.
-
-**Precondiciones:**
-
-- El material debe encontrarse registrado.
+**Objetivo:** Conocer la ubicación actual de un material.
 
 **Flujo principal:**
 
-1. El usuario busca o selecciona el material.
+1. El usuario selecciona o busca el material.
 2. El sistema identifica el material.
 3. El sistema consulta su ubicación actual.
-4. El sistema muestra la ubicación al usuario.
-
-**Postcondición:**
-
-- No se modifica información.
+4. El sistema muestra la ubicación.
 
 ### Criterios de aceptación
 
-- El sistema deberá mostrar la última ubicación registrada del material.
-- La consulta deberá poder realizarse desde una computadora o dispositivo móvil conectado a la red interna.
-- La operación deberá poder completarse en menos de dos minutos en condiciones normales de funcionamiento.
+- Si el material posee una ubicación actual registrada, el sistema deberá mostrarla.
+- Si todavía no posee una ubicación registrada, el sistema deberá informar que no existe una ubicación actual conocida.
+- La consulta deberá poder realizarse desde PC o celular conectado a la red interna.
+- La operación deberá poder completarse en menos de dos minutos en condiciones normales.
 
 ## CU-08 — Registrar movimiento
 
@@ -242,151 +200,90 @@ Usuario que consulta información y registra movimientos durante el proceso prod
 
 - El operario debe estar identificado.
 - El material debe estar registrado.
-- La ubicación de destino debe existir en el sistema.
+- La ubicación de destino debe existir.
 
 **Flujo principal:**
 
 1. El operario selecciona el material.
-2. El sistema muestra su ubicación actual.
-3. El operario selecciona el tipo de movimiento.
-4. El operario indica la ubicación de destino.
-5. El operario puede agregar una observación.
-6. El sistema muestra los datos del movimiento.
-7. El operario confirma la operación.
-8. El sistema registra el movimiento.
-9. El sistema actualiza la ubicación actual del material.
-10. El movimiento queda incorporado al historial.
-
-**Flujos alternativos:**
-
-- Si falta información obligatoria, el sistema no registra el movimiento e informa qué dato debe completarse.
-- Si el material corresponde a otro transformador, se ejecuta el caso de uso CU-12.
-
-**Postcondiciones:**
-
-- El movimiento queda registrado.
-- La ubicación actual del material queda actualizada.
-- El historial conserva el movimiento realizado.
+2. El sistema muestra el transformador al que pertenece.
+3. El sistema muestra su ubicación actual.
+4. El operario selecciona el tipo de movimiento.
+5. Indica la ubicación de destino.
+6. Puede agregar una observación.
+7. El sistema valida la operación.
+8. El operario confirma.
+9. El sistema registra el movimiento.
+10. El sistema actualiza la ubicación actual del material.
+11. El movimiento queda incorporado al historial.
 
 ### Criterios de aceptación
 
-- Cada movimiento deberá registrar material, origen, destino, usuario, fecha y hora.
-- Al confirmar un movimiento válido, la ubicación actual deberá coincidir con el destino.
-- El movimiento deberá aparecer en el historial.
-- Un operario diferente al que realizó el movimiento anterior deberá poder registrar el siguiente.
-- Una observación podrá incluirse de forma opcional.
+- Cada movimiento deberá registrar material, origen cuando corresponda, destino, usuario, fecha y hora.
+- La ubicación actual deberá actualizarse con el destino.
+- El movimiento deberá conservarse en el historial.
+- Un operario diferente podrá registrar el movimiento siguiente.
 
 ## CU-09 — Consultar historial de movimientos
 
 **Actor principal:** Administrador u Operario.
 
-**Objetivo:** Consultar los movimientos registrados de un material.
-
-**Precondiciones:**
-
-- El material debe encontrarse registrado.
-
-**Flujo principal:**
-
-1. El usuario selecciona un material.
-2. El usuario solicita consultar su historial.
-3. El sistema recupera los movimientos registrados.
-4. El sistema muestra la información ordenada cronológicamente.
-
-**Postcondición:**
-
-- No se modifica información.
+**Objetivo:** Consultar los movimientos realizados sobre un material.
 
 ### Criterios de aceptación
 
-- Cada registro deberá mostrar origen y destino.
+- Cada movimiento deberá mostrar origen y destino.
 - Deberá mostrar fecha y hora.
-- Deberá identificar al usuario que registró el movimiento.
-- Deberá mostrar la observación cuando exista.
-- Los movimientos anteriores deberán conservarse aunque el material cambie nuevamente de ubicación.
+- Deberá identificar al usuario que realizó el registro.
+- Deberá mostrar observaciones cuando existan.
+- Los movimientos anteriores deberán conservarse.
 
 ## CU-10 — Registrar observación
 
 **Actor principal:** Administrador u Operario.
 
-**Objetivo:** Agregar información adicional relacionada con un material o movimiento.
-
-**Precondiciones:**
-
-- El usuario debe estar identificado.
-- El material debe estar registrado.
-
-**Flujo principal:**
-
-1. El usuario selecciona el material o movimiento correspondiente.
-2. El usuario escribe una observación.
-3. El sistema registra la observación.
-4. La observación queda disponible para futuras consultas.
-
-**Postcondición:**
-
-- La observación queda almacenada.
+**Objetivo:** Registrar información adicional relacionada con un material o movimiento.
 
 ### Criterios de aceptación
 
-- La observación deberá permitir texto libre.
+- La observación deberá aceptar texto libre.
 - No será obligatorio seleccionar un motivo predefinido.
-- El sistema deberá conservar el usuario relacionado con el registro cuando corresponda.
+- La observación deberá conservar el usuario que realizó el registro.
 
 ## CU-11 — Escanear QR de ubicación
 
 **Actor principal:** Operario.
 
-**Objetivo:** Identificar rápidamente una ubicación física mediante un código QR.
-
-**Precondiciones:**
-
-- La ubicación debe estar registrada.
-- Debe existir un código QR asociado a la ubicación.
-- El dispositivo debe tener acceso a la aplicación mediante la red interna.
+**Objetivo:** Identificar una ubicación física mediante un código QR.
 
 **Flujo principal:**
 
 1. El operario escanea el código QR.
-2. El sistema identifica la ubicación asociada.
-3. El sistema muestra la información de la ubicación.
-4. El operario puede consultar los materiales relacionados o iniciar el registro de un movimiento.
-
-**Postcondición:**
-
-- No se modifica información hasta que el usuario confirme alguna operación posterior.
+2. El sistema identifica la ubicación.
+3. El sistema muestra la información correspondiente.
+4. El operario puede consultar materiales o iniciar un movimiento.
 
 ### Criterios de aceptación
 
-- Cada QR deberá identificar una ubicación y no un material individual.
-- El sistema deberá mostrar la ubicación correspondiente al código escaneado.
-- El usuario deberá poder continuar desde esa ubicación hacia las funciones disponibles.
+- Cada QR deberá identificar una ubicación.
+- Los QR no deberán identificar materiales individuales.
+- El sistema deberá mostrar la ubicación correspondiente.
 
 ## CU-12 — Advertir material de otro transformador
 
 **Actor principal:** Operario.
 
-**Objetivo:** Evitar que un material correspondiente a un transformador sea utilizado inadvertidamente en otro.
-
-**Precondiciones:**
-
-- El material debe estar registrado.
-- El material debe estar asociado a un transformador.
+**Objetivo:** Evitar el uso inadvertido de un material correspondiente a otro transformador.
 
 **Flujo principal:**
 
-1. El operario intenta registrar una operación relacionada con un transformador.
-2. El sistema verifica el transformador asociado al material.
-3. El sistema detecta que no coincide con el transformador indicado.
-4. El sistema muestra una advertencia al operario.
+1. El operario intenta registrar una operación para un transformador.
+2. El sistema consulta a qué transformador pertenece el material.
+3. El sistema compara ambos transformadores.
+4. Si son diferentes, muestra una advertencia.
 5. El operario revisa la información antes de continuar.
-
-**Postcondición:**
-
-- El usuario recibe información sobre la inconsistencia antes de confirmar la operación.
 
 ### Criterios de aceptación
 
-- La verificación deberá realizarse antes de confirmar la operación.
-- La advertencia deberá identificar que el material corresponde a otro transformador.
+- La comparación deberá utilizar el identificador real del transformador.
+- La advertencia deberá mostrarse antes de confirmar la operación.
 - El sistema no deberá modificar automáticamente la asociación original del material.
