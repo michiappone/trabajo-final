@@ -63,22 +63,26 @@ La elección de una aplicación web se encuentra documentada en el [ADR-001 — 
 
 Cada transformador contará con:
 
-- Código identificador.
+- Número identificador, utilizado como ID del transformador.
+- Identificación del proveedor asociada.
 - Materiales asociados.
 - Ubicación principal asignada para sus materiales.
+
+El número del transformador corresponde a su identificación real dentro del proceso productivo, por ejemplo 6674, 6682 o 6785.
+
+Cada transformador posee además una identificación definida por el proveedor y grabada físicamente en los materiales que le corresponden. Esta identificación puede presentarse con diferentes formatos, por ejemplo UN20 o K486.
+
+Todos los materiales correspondientes a un mismo transformador comparten esta identificación.
+
+El sistema no generará ni modificará automáticamente la identificación del proveedor, sino que registrará el valor existente para utilizarlo como parte de la trazabilidad.
 
 Cada material podrá registrar, entre otros datos:
 
 - Tipo o descripción del material.
-- Identificación UN.
 - Transformador al que se encuentra asociado.
 - Ubicación actual.
 - Historial de movimientos.
 - Observaciones.
-
-La UN es una identificación que ya se encuentra grabada físicamente en el material según el estándar definido por el proveedor.
-
-El sistema no generará ni asignará esta identificación, sino que registrará la UN existente para utilizarla como parte de la trazabilidad del material.
 
 También existirán ubicaciones temporales para almacenar materiales que se encuentren separados momentáneamente de su transformador.
 
@@ -105,8 +109,8 @@ Podrá gestionar:
 
 - Áreas.
 - Ubicaciones.
-- Transformadores.
-- Materiales y registro de su identificación UN.
+- Transformadores y sus identificaciones de proveedor.
+- Materiales asociados a cada transformador.
 - Usuarios.
 
 ### Operario
@@ -129,8 +133,9 @@ La primera versión del sistema estará enfocada en la trazabilidad de materiale
 
 - Gestión de áreas y ubicaciones.
 - Gestión de transformadores.
+- Registro de transformadores mediante su número identificador.
+- Registro de la identificación del proveedor asociada a cada transformador.
 - Registro de materiales asociados a cada transformador.
-- Registro de la identificación UN existente en cada material.
 - Consulta de la ubicación actual de los materiales.
 - Registro de ingresos, traslados internos, devoluciones a depósito y pases a despacho.
 - Registro del usuario que realizó cada movimiento.

@@ -28,6 +28,7 @@ Podrá gestionar:
 - Áreas.
 - Ubicaciones.
 - Transformadores.
+- Identificaciones de proveedor asociadas a transformadores.
 - Materiales.
 
 ### Operario
@@ -79,43 +80,63 @@ Las ubicaciones podrán utilizarse como ubicaciones principales o temporales par
 
 El administrador deberá poder registrar y gestionar los transformadores que se encuentren activos dentro del proceso productivo.
 
-Cada transformador deberá contar con un código identificador.
+El número real del transformador será utilizado como identificador único dentro del sistema.
+
+Ejemplos:
+
+- 6674.
+- 6682.
+- 6785.
+
+No se utilizará un código adicional para identificar al transformador.
+
+Cada transformador deberá registrar además la identificación proporcionada por el proveedor para sus materiales.
+
+Esta identificación podrá contener letras y números, por ejemplo:
+
+- UN20.
+- UN46.
+- K486.
 
 ### RF-07 — Registro de materiales
 
-El administrador deberá poder registrar los materiales que serán controlados mediante el sistema.
+El administrador deberá poder registrar los materiales controlados mediante el sistema.
 
-Para cada material se deberá poder registrar, como mínimo:
+Para cada material se deberá registrar, como mínimo:
 
 - Tipo o descripción.
-- Identificación UN.
-- Transformador asociado.
+- Transformador al cual pertenece.
 
-La identificación UN deberá corresponder a la identificación que el material ya posee físicamente según el estándar del proveedor.
-
-El sistema no deberá generar ni asignar automáticamente números UN.
+La identificación del proveedor no deberá almacenarse de manera independiente en cada material, ya que corresponde al transformador y es compartida por todos sus materiales.
 
 ### RF-08 — Asociación entre materiales y transformadores
 
-El sistema deberá permitir asociar cada material con el transformador al cual corresponde.
+Cada material deberá estar asociado a un transformador.
 
-Esta asociación será utilizada para mantener la trazabilidad y detectar posibles usos de materiales correspondientes a otro transformador.
+A partir de esta asociación será posible conocer también la identificación del proveedor correspondiente al material.
 
 ### RF-09 — Consulta de transformadores y materiales
 
 El sistema deberá permitir consultar los transformadores activos y visualizar los materiales asociados a cada uno.
 
-Para cada material deberá mostrarse su ubicación actual conocida.
+La consulta deberá mostrar:
+
+- Número del transformador.
+- Identificación del proveedor.
+- Materiales asociados.
+- Ubicación actual conocida de cada material.
 
 ### RF-10 — Consulta de ubicación actual
 
 El sistema deberá permitir consultar la ubicación actual de un material.
 
+Si el material todavía no posee una ubicación registrada, el sistema deberá indicar que no existe una ubicación actual conocida.
+
 ### RF-11 — Registro de movimientos
 
 El sistema deberá permitir registrar movimientos de materiales.
 
-Como mínimo deberán contemplarse los siguientes tipos:
+Como mínimo deberán contemplarse:
 
 - Ingreso.
 - Traslado interno.
@@ -128,7 +149,7 @@ Cada movimiento deberá registrar:
 
 - Material involucrado.
 - Transformador asociado.
-- Ubicación de origen.
+- Ubicación de origen, cuando corresponda.
 - Ubicación de destino.
 - Usuario que realizó el registro.
 - Fecha.
@@ -137,7 +158,7 @@ Cada movimiento deberá registrar:
 
 ### RF-13 — Actualización de ubicación
 
-Cuando se registre correctamente un movimiento, el sistema deberá actualizar la ubicación actual del material de acuerdo con el destino indicado.
+Cuando se registre correctamente un movimiento, el sistema deberá actualizar la ubicación actual del material con la ubicación de destino.
 
 ### RF-14 — Registro entre diferentes turnos
 
@@ -149,36 +170,36 @@ Cualquier operario habilitado podrá continuar registrando movimientos sobre un 
 
 El sistema deberá conservar un historial de los movimientos realizados sobre cada material.
 
-El historial deberá permitir consultar, como mínimo:
+El historial deberá permitir consultar:
 
 - Ubicación de origen.
 - Ubicación de destino.
 - Fecha.
 - Hora.
-- Usuario que realizó el registro.
+- Usuario.
 - Observaciones asociadas.
 
 ### RF-16 — Registro de observaciones
 
-Los usuarios habilitados deberán poder agregar observaciones relacionadas con un material o movimiento cuando resulte necesario.
+Los usuarios habilitados deberán poder agregar observaciones relacionadas con un material o movimiento.
 
-Las observaciones serán de texto libre y no requerirán seleccionar un motivo predefinido.
+Las observaciones serán de texto libre.
 
 ### RF-17 — Advertencia por material de otro transformador
 
-Cuando se intente utilizar o registrar un material asociado a un transformador diferente del correspondiente, el sistema deberá mostrar una advertencia antes de confirmar la operación.
+Cuando se intente utilizar un material asociado a un transformador diferente del correspondiente, el sistema deberá mostrar una advertencia antes de confirmar la operación.
 
 ### RF-18 — Ubicaciones temporales
 
-El sistema deberá permitir registrar materiales en ubicaciones temporales cuando se encuentren separados momentáneamente de su ubicación principal.
+El sistema deberá permitir registrar materiales en ubicaciones temporales cuando se encuentren separados momentáneamente de la ubicación principal correspondiente a su transformador.
 
 ### RF-19 — Uso de códigos QR
 
-El sistema deberá permitir utilizar códigos QR asociados a las ubicaciones físicas.
+El sistema deberá permitir utilizar códigos QR asociados a ubicaciones físicas.
 
 Al escanear un código QR, el usuario deberá poder identificar la ubicación correspondiente y acceder a las funciones relacionadas con ella.
 
-Los códigos QR no serán colocados individualmente sobre los materiales.
+Los códigos QR no estarán asociados individualmente a los materiales.
 
 ### RF-20 — Consulta del historial de una ubicación
 
@@ -200,9 +221,9 @@ Deberá poder utilizarse tanto desde computadoras como desde teléfonos celulare
 
 ### RNF-03 — Funcionamiento en red local
 
-La primera versión de la aplicación deberá funcionar dentro de la red interna de la fábrica.
+La primera versión deberá funcionar dentro de la red interna de la fábrica.
 
-El funcionamiento normal del sistema no deberá depender de una conexión permanente a Internet.
+El funcionamiento normal no deberá depender de una conexión permanente a Internet.
 
 ### RNF-04 — Compatibilidad
 
@@ -211,8 +232,6 @@ La aplicación deberá poder utilizarse mediante navegadores web actuales desde 
 ### RNF-05 — Usabilidad
 
 Las operaciones habituales deberán diseñarse para requerir la menor cantidad razonable de pasos.
-
-La interfaz deberá priorizar la simplicidad debido a que será utilizada durante el proceso productivo.
 
 ### RNF-06 — Tiempo de operación
 
@@ -234,27 +253,19 @@ La decisión se encuentra documentada en el [ADR-003 — Stack backend](adr/ADR-
 
 Las funcionalidades disponibles deberán limitarse según el rol del usuario.
 
-Las operaciones administrativas deberán estar reservadas a usuarios con rol de administrador.
-
 ### RNF-10 — Trazabilidad
 
-Los movimientos registrados deberán conservar información suficiente para identificar:
-
-- Qué material fue movido.
-- Desde qué ubicación.
-- Hacia qué ubicación.
-- Cuándo se realizó.
-- Qué usuario realizó el registro.
+Los movimientos deberán conservar información suficiente para identificar qué material fue movido, desde dónde, hacia dónde, cuándo y por qué usuario.
 
 ### RNF-11 — Copias de seguridad
 
 La base de datos deberá contar con copias de seguridad automáticas al menos una vez por semana.
 
-Los respaldos deberán almacenarse en un servidor o equipo diferente de aquel donde se ejecuten la aplicación y la base de datos.
+Los respaldos deberán almacenarse en un equipo o servidor diferente del equipo principal.
 
 ### RNF-12 — Escalabilidad funcional
 
-Aunque la primera versión se implemente en Terminación, la estructura del sistema deberá permitir incorporar posteriormente otras áreas productivas sin requerir un rediseño completo de la aplicación.
+Aunque la primera versión se implemente en Terminación, la estructura deberá permitir incorporar posteriormente otras áreas productivas.
 
 ### RNF-13 — Disponibilidad local
 
@@ -262,46 +273,62 @@ El sistema deberá poder utilizarse durante los turnos de trabajo mientras se en
 
 ## Reglas de negocio
 
-### RN-01 — Identificación UN
+### RN-01 — Identificador del transformador
 
-La identificación UN es definida según el estándar del proveedor y se encuentra grabada físicamente en cada material.
+El número real del transformador será utilizado como su identificador único dentro del sistema.
 
-El sistema únicamente registrará esa identificación.
+No se utilizará un identificador técnico adicional para representar al transformador.
 
-No deberá generar ni asignar automáticamente una UN.
+### RN-02 — Identificación del proveedor
 
-### RN-02 — Asociación con transformadores
+Cada transformador tendrá asociada una única identificación proporcionada por el proveedor.
 
-Cada material deberá estar asociado al transformador al cual corresponde.
+La identificación podrá ser alfanumérica y se almacenará como texto.
 
-### RN-03 — Ubicación actual
+Ejemplos:
 
-Cada material tendrá una ubicación actual conocida.
+- UN20.
+- UN46.
+- K486.
 
-Cuando se registre un nuevo movimiento, dicha ubicación deberá actualizarse con el destino registrado.
+### RN-03 — Identificación compartida por los materiales
 
-### RN-04 — Ubicaciones temporales
+Todos los materiales pertenecientes a un mismo transformador comparten la identificación del proveedor asociada a dicho transformador.
 
-Un material podrá permanecer temporalmente en una ubicación diferente de la principal asignada para los materiales de su transformador.
+Por este motivo, la identificación no deberá almacenarse repetidamente en cada material.
 
-### RN-05 — QR asociados a ubicaciones
+### RN-04 — Asociación con transformadores
+
+Cada material deberá estar asociado a un único transformador.
+
+### RN-05 — Ubicación actual
+
+Cada material podrá tener cero o una ubicación actual registrada.
+
+Un material podrá no tener una ubicación conocida hasta que se registre su primer movimiento.
+
+Cuando se registre un nuevo movimiento, la ubicación actual deberá actualizarse con el destino registrado.
+
+### RN-06 — Ubicaciones temporales
+
+Un material podrá permanecer temporalmente en una ubicación diferente de la ubicación principal correspondiente a su transformador.
+
+### RN-07 — QR asociados a ubicaciones
 
 Los códigos QR estarán asociados a ubicaciones físicas y no a materiales individuales.
 
-### RN-06 — Operarios diferentes
+### RN-08 — Operarios diferentes
 
 Un movimiento podrá ser registrado por un operario diferente de quien realizó el movimiento anterior.
 
-El sistema conservará el usuario correspondiente a cada registro.
-
-### RN-07 — Advertencias entre transformadores
+### RN-09 — Advertencias entre transformadores
 
 Cuando exista una diferencia entre el transformador asociado al material y aquel sobre el cual se intenta utilizar, el sistema deberá advertir al usuario antes de confirmar la operación.
 
-### RN-08 — Observaciones
+### RN-10 — Observaciones
 
 Las observaciones serán opcionales y podrán escribirse como texto libre.
 
-### RN-09 — Historial
+### RN-11 — Historial
 
-Los movimientos registrados formarán parte del historial del material y no deberán eliminarse al producirse movimientos posteriores.
+Los movimientos registrados formarán parte del historial del material y deberán conservarse aunque posteriormente cambie su ubicación.
