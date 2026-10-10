@@ -1,3 +1,4 @@
+
 # Registro General de Cambios
 
 Este archivo registra los principales cambios, decisiones y avances realizados durante el proyecto.
@@ -8,6 +9,7 @@ Este archivo registra los principales cambios, decisiones y avances realizados d
 - [13/09/2026](#13092026)
 - [25/09/2026](#25092026)
 - [26/09/2026](#26092026)
+- [10/10/2026](#10102026)
 
 ## 30/08/2026
 
@@ -127,3 +129,24 @@ Este archivo registra los principales cambios, decisiones y avances realizados d
 - Se creó el ADR-007 para documentar el uso conjunto de ubicación actual e historial de movimientos.
 - Se definió que el registro de un movimiento y la actualización de la ubicación actual deberán realizarse dentro de una misma operación transaccional.
 - Se documentaron los módulos funcionales previstos para el desarrollo del sistema.
+
+## 10/10/2026
+
+### Correcciones posteriores a la segunda entrega
+
+- Se aplicaron las observaciones recibidas en la revisión de la segunda entrega.
+- Se ajustó la descripción de la solución para orientarla con mayor claridad a la resolución del problema de negocio.
+- Se incorporó una matriz de trazabilidad entre funcionalidades, requisitos, casos de uso y reglas de negocio.
+- Se agregó una clasificación que diferencia los riesgos de implementación de la solución de los riesgos propios del proyecto.
+- Se revisó la propuesta de despliegue y se incorporó como alternativa preferente el uso de infraestructura interna dedicada, sujeta a validación con el área de Sistemas.
+- Se mantuvo como alternativa para el piloto el uso de un equipo dedicado dentro de la red interna en caso de no disponer de infraestructura dedicada.
+- Se revisó el flujo de registro de movimientos para representar las validaciones y decisiones propias del proceso.
+- Se definió que el flujo comienza seleccionando el transformador y posteriormente uno de sus materiales asociados.
+- Se representó el registro del movimiento y la actualización de la ubicación del material como una única operación transaccional.
+- Se reemplazaron los diagramas Mermaid del modelo de datos por diagramas elaborados con diagrams.net.
+- Se elaboró un nuevo diagrama entidad-relación utilizando notación Crow's Foot.
+- Se elaboró un nuevo diagrama de clases utilizando asociaciones UML sin flechas direccionales.
+- Se elaboró un diagrama de flujo para representar el proceso de registro de movimientos.
+- Se incorporó un diagrama de interacción entre los módulos del sistema.
+- Se conservaron los archivos editables `.drawio` junto con las imágenes `.png` utilizadas en la documentación.
+- Se ajustaron los casos de uso de gestión de áreas y ubicaciones, registro de movimientos y consulta de historial para mantener su consistencia con los requisitos y los nuevos diagramas.

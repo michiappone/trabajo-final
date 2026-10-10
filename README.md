@@ -19,12 +19,14 @@ El proyecto propone desarrollar una aplicación web para mejorar la trazabilidad
 - [Propuesta del proyecto](src/docs/propuesta-proyecto.md)
 - [Requisitos del sistema](src/docs/requisitos.md)
 - [Casos de uso](src/docs/casos-de-uso.md)
-- [Modelo de datos y diagrama de clases](src/docs/modelo-datos.md)
+- [Matriz de trazabilidad](src/docs/trazabilidad.md)
+- [Módulos del sistema](src/docs/modulos.md)
+- [Modelo de datos y diagramas](src/docs/modelo-datos.md)
 - [Arquitectura del sistema](src/docs/arquitectura.md)
 - [Roadmap](src/docs/roadmap.md)
 - [Registro general de cambios](src/docs/changelog.md)
-- - [Módulos del sistema](src/docs/modulos.md)
 - ADR: `src/docs/adr/`
+- Diagramas: `src/docs/diagramas/`
 
 ## Integrantes
 
@@ -48,9 +50,11 @@ La aplicación permitirá registrar y consultar:
 - Historial de movimientos.
 - Ubicaciones mediante códigos QR.
 
-La identificación del proveedor no será generada por la aplicación. Cada transformador tendrá asociada una identificación existente, que puede presentarse con formatos como UN20 o K486 y se encuentra grabada físicamente en sus materiales.
+La identificación del proveedor no será generada por la aplicación.
 
-La primera versión estará enfocada en el área de Terminación y funcionará dentro de la red local de la fábrica.
+Cada transformador tendrá asociada una identificación existente, que puede presentarse con formatos como UN20 o K486 y se encuentra grabada físicamente en sus materiales.
+
+La primera versión estará enfocada en el área de Terminación y funcionará dentro de la red interna de la fábrica.
 
 ## Tecnologías previstas
 
@@ -98,13 +102,24 @@ trabajo-final/
 │   │   │   ├── ADR-005-despliegue-web-local.md
 │   │   │   ├── ADR-006-base-de-datos-postgresql.md
 │   │   │   └── ADR-007-modelo-ubicaciones-movimientos.md
+│   │   ├── diagramas/
+│   │   │   ├── diagrama-clases.drawio
+│   │   │   ├── diagrama-clases.png
+│   │   │   ├── flujo-movimiento.drawio
+│   │   │   ├── flujo-movimiento.png
+│   │   │   ├── modelo-entidad-relacion.drawio
+│   │   │   ├── modelo-entidad-relacion.png
+│   │   │   ├── modulos-interaccion.drawio
+│   │   │   └── modulos-interaccion.png
 │   │   ├── arquitectura.md
 │   │   ├── casos-de-uso.md
 │   │   ├── changelog.md
 │   │   ├── modelo-datos.md
+│   │   ├── modulos.md
 │   │   ├── propuesta-proyecto.md
 │   │   ├── requisitos.md
-│   │   └── roadmap.md
+│   │   ├── roadmap.md
+│   │   └── trazabilidad.md
 │   ├── frontend/
 │   └── Main.java
 ├── .gitignore

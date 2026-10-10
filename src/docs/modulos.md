@@ -1,3 +1,4 @@
+
 # Módulos del Sistema
 
 ## Índice
@@ -5,6 +6,7 @@
 - [Objetivo](#objetivo)
 - [Módulos principales](#módulos-principales)
 - [Relación entre módulos](#relación-entre-módulos)
+- [Diagrama de interacción entre módulos](#diagrama-de-interacción-entre-módulos)
 
 ## Objetivo
 
@@ -116,21 +118,25 @@ Contemplará:
 
 Los módulos estarán relacionados entre sí a través del modelo de datos y de la lógica de negocio del backend.
 
-Por ejemplo:
+Las principales relaciones son:
 
-```text
-Transformador
-    ↓
-Materiales
-    ↓
-Movimientos
-    ↓
-Ubicaciones
-```
+- Áreas agrupa las ubicaciones disponibles.
+- Ubicaciones participa en el registro de movimientos como origen o destino.
+- Los códigos QR permiten identificar rápidamente una ubicación.
+- Transformadores agrupa los materiales correspondientes a cada transformador.
+- Transformadores se relaciona con Ubicaciones mediante la ubicación principal.
+- Materiales utiliza Movimientos para conservar sus cambios de ubicación.
+- Usuarios registra movimientos y observaciones.
+- Observaciones aporta información adicional sobre materiales y movimientos.
+- Historial y consultas utiliza la información registrada por Materiales, Movimientos y Ubicaciones.
 
-Los usuarios serán responsables de registrar movimientos y observaciones.
+## Diagrama de interacción entre módulos
 
-Las ubicaciones pertenecerán a áreas productivas y podrán identificarse mediante códigos QR.
+El siguiente diagrama muestra las principales dependencias e interacciones entre los módulos del sistema.
+
+![Interacción entre módulos](diagramas/modulos-interaccion.png)
+
+[Archivo editable en diagrams.net](diagramas/modulos-interaccion.drawio)
 
 La arquitectura y las relaciones de datos se encuentran documentadas en:
 

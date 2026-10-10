@@ -5,7 +5,7 @@
 - [Actores](#actores)
 - [CU-01 — Iniciar sesión](#cu-01--iniciar-sesión)
 - [CU-02 — Gestionar usuarios](#cu-02--gestionar-usuarios)
-- [CU-03 — Gestionar ubicaciones](#cu-03--gestionar-ubicaciones)
+- [CU-03 — Gestionar áreas y ubicaciones](#cu-03--gestionar-áreas-y-ubicaciones)
 - [CU-04 — Gestionar transformadores](#cu-04--gestionar-transformadores)
 - [CU-05 — Registrar material](#cu-05--registrar-material)
 - [CU-06 — Consultar transformador y materiales](#cu-06--consultar-transformador-y-materiales)
@@ -63,24 +63,27 @@ El usuario debe encontrarse registrado y habilitado.
 - Todo usuario deberá poseer un rol.
 - No se podrán guardar usuarios si faltan datos obligatorios.
 
-## CU-03 — Gestionar ubicaciones
+## CU-03 — Gestionar áreas y ubicaciones
 
 **Actor principal:** Administrador.
 
-**Objetivo:** Registrar y administrar ubicaciones físicas.
+**Objetivo:** Registrar y administrar las áreas productivas y las ubicaciones físicas utilizadas por el sistema.
 
-**Flujo principal:**
+### Flujo principal
 
-1. El administrador accede a la gestión de ubicaciones.
-2. Registra o modifica una ubicación.
-3. El sistema valida los datos.
-4. El sistema guarda la información.
+1. El administrador accede a la gestión de áreas y ubicaciones.
+2. Registra o modifica un área productiva.
+3. Selecciona el área correspondiente.
+4. Registra o modifica una ubicación asociada al área.
+5. El sistema valida los datos.
+6. El sistema guarda la información.
 
 ### Criterios de aceptación
 
-- Cada ubicación deberá poder identificarse dentro del sistema.
-- Cada ubicación deberá pertenecer a un área.
-- Solo el administrador podrá gestionar ubicaciones.
+- Cada área deberá poder identificarse dentro del sistema.
+- Cada ubicación deberá pertenecer a una única área.
+- Las ubicaciones podrán utilizarse como principales o temporales según corresponda.
+- Solo el administrador podrá gestionar áreas y ubicaciones.
 
 ## CU-04 — Gestionar transformadores
 
@@ -199,27 +202,36 @@ El material queda asociado al transformador seleccionado.
 **Precondiciones:**
 
 - El operario debe estar identificado.
+- El transformador debe estar registrado.
 - El material debe estar registrado.
 - La ubicación de destino debe existir.
 
-**Flujo principal:**
+### Flujo principal
 
-1. El operario selecciona el material.
-2. El sistema muestra el transformador al que pertenece.
-3. El sistema muestra su ubicación actual.
-4. El operario selecciona el tipo de movimiento.
-5. Indica la ubicación de destino.
-6. Puede agregar una observación.
-7. El sistema valida la operación.
-8. El operario confirma.
-9. El sistema registra el movimiento.
-10. El sistema actualiza la ubicación actual del material.
-11. El movimiento queda incorporado al historial.
+1. El operario selecciona el transformador sobre el que está trabajando.
+2. El sistema muestra los materiales asociados al transformador.
+3. El operario selecciona el material.
+4. El sistema muestra la ubicación actual conocida del material.
+5. El operario selecciona el tipo de movimiento.
+6. Selecciona la ubicación de destino.
+7. Puede agregar una observación.
+8. El sistema valida los datos.
+9. El sistema registra el movimiento y actualiza la ubicación actual del material dentro de una misma operación.
+10. El movimiento queda incorporado al historial.
+11. El sistema informa que la operación fue realizada correctamente.
+
+### Flujo alternativo
+
+Si los datos ingresados no son válidos, el sistema deberá informar el error y no registrar modificaciones.
+
+Si ocurre un error durante el registro del movimiento o la actualización de la ubicación, la operación deberá revertirse para evitar modificaciones parciales.
 
 ### Criterios de aceptación
 
+- El material seleccionado deberá pertenecer al transformador seleccionado.
 - Cada movimiento deberá registrar material, origen cuando corresponda, destino, usuario, fecha y hora.
 - La ubicación actual deberá actualizarse con el destino.
+- El registro del movimiento y la actualización de la ubicación deberán realizarse de manera transaccional.
 - El movimiento deberá conservarse en el historial.
 - Un operario diferente podrá registrar el movimiento siguiente.
 
@@ -227,10 +239,20 @@ El material queda asociado al transformador seleccionado.
 
 **Actor principal:** Administrador u Operario.
 
-**Objetivo:** Consultar los movimientos realizados sobre un material.
+**Objetivo:** Consultar los movimientos asociados a un material o a una ubicación.
+
+### Flujo principal
+
+1. El usuario accede a la consulta de historial.
+2. Selecciona si desea consultar un material o una ubicación.
+3. Selecciona el material o la ubicación correspondiente.
+4. El sistema obtiene los movimientos asociados.
+5. El sistema muestra el historial disponible.
 
 ### Criterios de aceptación
 
+- Deberá permitirse consultar el historial de un material.
+- Deberá permitirse consultar los movimientos asociados a una ubicación.
 - Cada movimiento deberá mostrar origen y destino.
 - Deberá mostrar fecha y hora.
 - Deberá identificar al usuario que realizó el registro.
