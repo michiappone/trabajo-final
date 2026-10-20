@@ -57,36 +57,35 @@ Desarrollar una aplicación web que permita mejorar la trazabilidad de materiale
 
 ## Solución propuesta
 
-Desarrollar una aplicación web que permita registrar y consultar la ubicación de materiales asociados a transformadores dentro de áreas productivas.
+La solución propuesta busca mejorar la trazabilidad de los materiales asociados a transformadores durante su paso por el área de Terminación.
+
+Actualmente, una vez que los materiales salen del depósito, pueden producirse cambios de ubicación, movimientos de tarimas, devoluciones incorrectas o utilización temporal en otros transformadores. Esto provoca que los operarios deban invertir tiempo buscando materiales y aumenta el riesgo de faltantes cruzados o montajes incorrectos.
+
+Para abordar este problema, el sistema permitirá conocer la última ubicación registrada de cada material y conservar un historial de los movimientos realizados.
+
+Cada transformador será identificado mediante su número real dentro del proceso productivo, por ejemplo 6674, 6682 o 6785. Además, tendrá asociada la identificación definida por el proveedor y grabada físicamente en sus materiales, que puede presentarse con formatos como UN20 o K486.
+
+Todos los materiales correspondientes a un mismo transformador compartirán dicha identificación.
+
+Cuando un material cambie de ubicación, el operario podrá registrar el movimiento indicando su origen, destino y cualquier observación necesaria. Como resultado, los demás operarios podrán consultar dónde se encuentra actualmente el material sin depender únicamente de información verbal o de conocer quién realizó el movimiento anterior.
+
+También se utilizarán ubicaciones principales y temporales para representar los lugares donde pueden encontrarse los materiales durante el proceso.
+
+Las ubicaciones podrán identificarse mediante códigos QR, permitiendo que un operario acceda rápidamente desde un dispositivo móvil a la información correspondiente y registre o consulte movimientos.
+
+Cuando se intente utilizar un material asociado a otro transformador, el sistema mostrará una advertencia para reducir el riesgo de faltantes cruzados.
+
+De esta manera, la solución busca:
+
+- Reducir el tiempo empleado en localizar materiales.
+- Mantener actualizada su ubicación.
+- Conservar la trazabilidad de los movimientos.
+- Evitar confusiones entre materiales pertenecientes a diferentes transformadores.
+- Facilitar la continuidad del trabajo entre distintos operarios y turnos.
+
+La solución será implementada mediante una aplicación web accesible desde los dispositivos autorizados conectados a la red interna.
 
 La elección de una aplicación web se encuentra documentada en el [ADR-001 — Aplicación web](adr/ADR-001-arquitectura-web.md).
-
-Cada transformador contará con:
-
-- Número identificador, utilizado como ID del transformador.
-- Identificación del proveedor asociada.
-- Materiales asociados.
-- Ubicación principal asignada para sus materiales.
-
-El número del transformador corresponde a su identificación real dentro del proceso productivo, por ejemplo 6674, 6682 o 6785.
-
-Cada transformador posee además una identificación definida por el proveedor y grabada físicamente en los materiales que le corresponden. Esta identificación puede presentarse con diferentes formatos, por ejemplo UN20 o K486.
-
-Todos los materiales correspondientes a un mismo transformador comparten esta identificación.
-
-El sistema no generará ni modificará automáticamente la identificación del proveedor, sino que registrará el valor existente para utilizarlo como parte de la trazabilidad.
-
-Cada material podrá registrar, entre otros datos:
-
-- Tipo o descripción del material.
-- Transformador al que se encuentra asociado.
-- Ubicación actual.
-- Historial de movimientos.
-- Observaciones.
-
-También existirán ubicaciones temporales para almacenar materiales que se encuentren separados momentáneamente de su transformador.
-
-Las ubicaciones podrán identificarse mediante códigos QR para facilitar la consulta y el registro de movimientos.
 
 La decisión de utilizar códigos QR en las ubicaciones y no individualmente sobre cada material se encuentra documentada en el [ADR-004 — Uso de códigos QR](adr/ADR-004-uso-de-qr.md).
 
@@ -161,15 +160,19 @@ Quedan fuera del alcance inicial:
 - Importación masiva mediante archivos CSV o Excel.
 - Funcionamiento fuera de la red local de la fábrica.
 
+La relación entre las funcionalidades incluidas en el alcance, los requisitos, los casos de uso y las reglas de negocio se encuentra documentada en la [Matriz de trazabilidad](trazabilidad.md).
+
 ## Análisis de viabilidad
 
 ### Viabilidad técnica
 
 El proyecto es técnicamente viable porque utilizará tecnologías conocidas por los integrantes: Java, Spring Boot, Spring Data JPA, PostgreSQL, HTML, CSS y JavaScript.
 
-La aplicación podrá ejecutarse en un equipo conectado a la red local y utilizarse desde los navegadores de las computadoras y dispositivos móviles autorizados.
+La aplicación podrá ejecutarse dentro de la infraestructura interna de la empresa y utilizarse desde los navegadores de las computadoras y dispositivos móviles autorizados.
 
-El relevamiento de infraestructura confirmó que la empresa proporcionará un equipo para ejecutar el sistema, que el área posee cobertura Wi-Fi y que los dispositivos autorizados podrán acceder mediante la red interna.
+El relevamiento inicial confirmó que el área posee cobertura Wi-Fi y que los dispositivos autorizados podrán acceder mediante la red interna.
+
+La infraestructura exacta donde se ejecutarán el backend y la base de datos deberá validarse con el área de Sistemas antes del despliegue definitivo.
 
 Las principales decisiones técnicas se encuentran documentadas mediante ADR dentro del repositorio.
 
@@ -252,7 +255,7 @@ Frente al procedimiento utilizado actualmente, permitirá centralizar la informa
 
 En comparación con soluciones comerciales de inventario o trazabilidad, la propuesta tendrá un alcance específico, centrado en los materiales asociados a transformadores y en las necesidades concretas del área de Terminación.
 
-Además, podrá ejecutarse dentro de la infraestructura existente de la fábrica sin depender de una conexión permanente a Internet.
+Además, podrá ejecutarse dentro de la infraestructura interna disponible en la fábrica sin depender de una conexión permanente a Internet.
 
 ## Tecnologías
 
@@ -299,55 +302,59 @@ La aplicación será web y responsive, permitiendo su utilización desde computa
 
 La elección de una aplicación web responsive se encuentra documentada en el [ADR-001 — Aplicación web](adr/ADR-001-arquitectura-web.md).
 
-El sistema se desplegará en una computadora proporcionada por la empresa y ubicada en el área de Terminación.
+Los dispositivos autorizados accederán al sistema mediante la red interna de la fábrica, evitando que el funcionamiento habitual dependa de una conexión permanente a Internet.
 
-Los dispositivos autorizados accederán a la aplicación mediante la red interna de la fábrica.
+Inicialmente se había considerado utilizar una computadora ubicada en el área de Terminación como equipo servidor. Sin embargo, al encontrarse dentro del área productiva, este equipo puede estar más expuesto a interrupciones, fallas físicas o condiciones propias del entorno industrial.
 
-Este despliegue permitirá utilizar el sistema sin depender de una conexión permanente a Internet.
+Por este motivo, se evaluará junto con el área de Sistemas la posibilidad de alojar la aplicación y la base de datos en un servidor interno dedicado, datacenter u otra infraestructura equivalente disponible dentro de la empresa.
 
-La red interna y el equipo continuarán funcionando cuando la planta opere mediante generadores.
+Esta alternativa permitiría mantener el sistema dentro de la red interna y, al mismo tiempo, separar el servidor de los equipos utilizados directamente en planta.
 
-Un administrador designado será responsable de mantener el equipo en funcionamiento y verificar las copias de seguridad automáticas semanales almacenadas en un servidor local diferente.
+En caso de que la empresa no disponga de dicha infraestructura para la etapa inicial, podrá utilizarse una computadora dedicada como alternativa para realizar el piloto, manteniendo las copias de seguridad en un equipo o servidor diferente.
 
-La decisión de despliegue se encuentra documentada en el [ADR-005 — Despliegue web local](adr/ADR-005-despliegue-web-local.md).
+La decisión definitiva dependerá de la infraestructura que confirme el área de Sistemas.
+
+El despliegue local originalmente considerado se encuentra documentado en el [ADR-005 — Despliegue web local](adr/ADR-005-despliegue-web-local.md). En caso de modificarse la decisión definitiva de infraestructura, se registrará mediante un nuevo ADR.
 
 ## Relevamiento de infraestructura
 
 Se realizó un relevamiento inicial de la infraestructura necesaria para determinar la viabilidad del despliegue local del sistema.
 
-La empresa deberá proporcionar una computadora con componentes adecuados para ejecutar la aplicación.
-
-El equipo estará ubicado en el área de Terminación y podrá permanecer encendido durante todos los turnos de trabajo.
-
-La computadora se conectará mediante Wi-Fi a la red interna.
-
-El área de Terminación cuenta con cobertura estable y los celulares de los operarios podrán conectarse a la misma red para acceder a la aplicación.
+El área de Terminación cuenta con cobertura Wi-Fi y los celulares de los operarios podrán conectarse a la red interna para acceder a la aplicación.
 
 Se confirmó que la red interna continuará funcionando cuando la planta opere mediante generadores.
 
-También estará permitida la instalación de las tecnologías necesarias, incluyendo Java, PostgreSQL y la aplicación web.
+También estará permitida la utilización de las tecnologías necesarias para el proyecto, incluyendo Java, PostgreSQL y la aplicación web.
 
-Un administrador designado será responsable de mantener el equipo en funcionamiento, administrar la aplicación y verificar que las copias de seguridad se ejecuten correctamente.
+Para el despliegue definitivo se deberá validar con el área de Sistemas si existe un servidor interno, datacenter u otra infraestructura dedicada donde puedan alojarse el backend y la base de datos.
 
-Las copias de seguridad se realizarán automáticamente una vez por semana y se almacenarán en un servidor local destinado a respaldos.
+El orden de preferencia para el despliegue será:
 
-La configuración deberá garantizar que las copias no se almacenen en el mismo equipo donde se ejecuten la aplicación y la base de datos.
+1. Servidor interno o infraestructura dedicada administrada por Sistemas.
+2. En caso de no encontrarse disponible, equipo dedicado para el piloto dentro de la red local.
 
-Las características técnicas del equipo, como el sistema operativo, la memoria RAM, el procesador y el espacio de almacenamiento, se definirán antes de instalar la aplicación.
+Los dispositivos de los operarios no almacenarán directamente la información del sistema, sino que accederán a ella mediante la aplicación web.
+
+Las copias de seguridad deberán ejecutarse automáticamente y almacenarse en un equipo o servidor diferente del que aloje la aplicación y la base de datos.
+
+Un administrador designado será responsable de verificar el funcionamiento de la aplicación y la correcta ejecución de las copias de seguridad.
+
+Las características técnicas definitivas del servidor o equipo utilizado se establecerán una vez confirmada la infraestructura disponible por parte de Sistemas.
 
 ## Riesgos y medidas de mitigación
 
-| Riesgo | Medida de mitigación |
-|---|---|
-| Interrupción de la conexión Wi-Fi | Controlar la estabilidad de la red y evaluar una conexión por cable si se producen interrupciones. |
-| Falla del equipo donde se ejecuta la aplicación | Realizar copias de seguridad automáticas en un servidor local diferente. |
-| Fallas no detectadas en las copias de seguridad | Designar un administrador responsable de verificar periódicamente los respaldos. |
-| Movimientos no registrados | Diseñar un formulario sencillo que permita registrar el movimiento y agregar observaciones. |
-| Operarios de diferentes turnos | Permitir que cualquier operario habilitado registre un movimiento, aunque no haya realizado el registro anterior. |
-| Uso de materiales de otro transformador | Mostrar una advertencia antes de confirmar el movimiento. |
-| Reubicación de tarimas | Identificar las ubicaciones mediante códigos QR. |
-| Resistencia al uso del sistema | Diseñar pantallas sencillas y realizar una prueba piloto con operarios. |
-| Ampliación excesiva del alcance | Limitar la primera versión al área de Terminación. |
+| Riesgo | Tipo | Medida de mitigación |
+|---|---|---|
+| Interrupción de la conexión Wi-Fi | Implementación de la solución | Controlar la estabilidad de la red y evaluar una conexión por cable en los puntos necesarios. |
+| Falla del equipo o servidor donde se ejecuta la aplicación | Implementación de la solución | Utilizar infraestructura interna protegida cuando esté disponible y mantener copias de seguridad en un equipo diferente. |
+| Fallas no detectadas en las copias de seguridad | Implementación de la solución | Designar un responsable y verificar periódicamente la correcta generación y recuperación de los respaldos. |
+| Movimientos no registrados por los operarios | Implementación de la solución | Diseñar un proceso de registro simple y rápido, con formularios que requieran la menor cantidad posible de pasos. |
+| Intervención de operarios de diferentes turnos | Implementación de la solución | Permitir que cualquier operario habilitado pueda continuar registrando movimientos y conservar quién realizó cada operación. |
+| Uso de materiales correspondientes a otro transformador | Implementación de la solución | Mostrar una advertencia antes de confirmar la utilización o movimiento del material. |
+| Reubicación de tarimas o ubicaciones temporales | Implementación de la solución | Identificar las ubicaciones y permitir registrar los traslados realizados. |
+| Resistencia de los usuarios al uso del sistema | Proyecto | Diseñar interfaces simples, realizar una prueba piloto y considerar la devolución de los operarios. |
+| Demoras en la validación de infraestructura con Sistemas | Proyecto | Realizar la consulta con anticipación y mantener una alternativa de despliegue para el piloto. |
+| Ampliación excesiva del alcance durante el desarrollo | Proyecto | Mantener la primera versión enfocada en Terminación y registrar nuevas funcionalidades como trabajo futuro. |
 
 Los movimientos no dependerán de que el mismo operario realice todos los registros.
 

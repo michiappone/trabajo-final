@@ -362,6 +362,8 @@ Esto evita duplicar información y mantiene una única fuente para el dato.
 
 El material almacenará una referencia a su ubicación actual para permitir consultas rápidas.
 
+Un material recién registrado podrá no tener una ubicación actual conocida hasta que se registre su primer movimiento.
+
 Cuando se registre un movimiento:
 
 1. Se guardará el movimiento.
@@ -389,118 +391,18 @@ La política definitiva de bajas y desactivaciones se definirá antes de impleme
 
 ## Diagrama entidad-relación
 
-```mermaid
-erDiagram
+El siguiente diagrama representa el modelo entidad-relación utilizando notación Crow's Foot.
 
-    AREA ||--o{ UBICACION : contiene
+![Diagrama entidad-relación](diagramas/modelo-entidad-relacion.png)
 
-    TRANSFORMADOR ||--o{ MATERIAL : posee
-    TRANSFORMADOR o|--|| UBICACION : ubicacion_principal
-
-    UBICACION o|--o{ MATERIAL : ubicacion_actual
-
-    MATERIAL ||--o{ MOVIMIENTO : registra
-
-    UBICACION o|--o{ MOVIMIENTO : origen
-    UBICACION ||--o{ MOVIMIENTO : destino
-
-    USUARIO ||--o{ MOVIMIENTO : registra
-
-    MATERIAL ||--o{ OBSERVACION : posee
-    MOVIMIENTO o|--o{ OBSERVACION : puede_tener
-    USUARIO ||--o{ OBSERVACION : registra
-```
+[Archivo editable en diagrams.net](diagramas/modelo-entidad-relacion.drawio)
 
 ## Diagrama de clases
 
-```mermaid
-classDiagram
+El siguiente diagrama representa las principales clases, atributos, enumeraciones y asociaciones del sistema utilizando notación UML.
 
-    class Usuario {
-        +Long id
-        +String nombre
-        +String usuario
-        +String passwordHash
-        +Rol rol
-    }
+Las asociaciones se representan mediante líneas simples sin flechas direccionales y se indican las cardinalidades correspondientes en cada extremo.
 
-    class Area {
-        +Long id
-        +String nombre
-        +String descripcion
-    }
+![Diagrama de clases](diagramas/diagrama-clases.png)
 
-    class Ubicacion {
-        +Long id
-        +String codigo
-        +String nombre
-        +TipoUbicacion tipo
-        +String codigoQr
-    }
-
-    class Transformador {
-        +Long id
-        +String identificacionProveedor
-        +Boolean activo
-    }
-
-    class Material {
-        +Long id
-        +String descripcion
-    }
-
-    class Movimiento {
-        +Long id
-        +TipoMovimiento tipo
-        +LocalDateTime fechaHora
-    }
-
-    class Observacion {
-        +Long id
-        +String texto
-        +LocalDateTime fechaHora
-    }
-
-    class Rol {
-        <<enumeration>>
-        ADMINISTRADOR
-        OPERARIO
-    }
-
-    class TipoUbicacion {
-        <<enumeration>>
-        PRINCIPAL
-        TEMPORAL
-        DEPOSITO
-        DESPACHO
-    }
-
-    class TipoMovimiento {
-        <<enumeration>>
-        INGRESO
-        TRASLADO_INTERNO
-        DEVOLUCION_DEPOSITO
-        PASE_DESPACHO
-    }
-
-    Area "1" --> "*" Ubicacion : contiene
-
-    Transformador "0..1" --> "1" Ubicacion : ubicacionPrincipal
-    Transformador "1" --> "*" Material : materiales
-
-    Material "*" --> "0..1" Ubicacion : ubicacionActual
-
-    Material "1" --> "*" Movimiento : historial
-
-    Movimiento "*" --> "0..1" Ubicacion : origen
-    Movimiento "*" --> "1" Ubicacion : destino
-    Usuario "1" --> "*" Movimiento : registra
-
-    Material "1" --> "*" Observacion : observaciones
-    Movimiento "0..1" --> "*" Observacion : relacionadas
-    Usuario "1" --> "*" Observacion : registra
-
-    Usuario --> Rol
-    Ubicacion --> TipoUbicacion
-    Movimiento --> TipoMovimiento
-```
+[Archivo editable en diagrams.net](diagramas/diagrama-clases.drawio)

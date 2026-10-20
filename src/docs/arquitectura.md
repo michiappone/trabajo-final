@@ -17,26 +17,35 @@
 
 La arquitectura del sistema busca separar la interfaz utilizada por los operarios, la lógica de negocio y la persistencia de datos.
 
-La aplicación se ejecutará dentro de la red local de la fábrica y podrá utilizarse desde computadoras y dispositivos móviles mediante un navegador web.
+La aplicación funcionará dentro de la red interna de la fábrica y podrá utilizarse desde computadoras y dispositivos móviles mediante un navegador web.
 
 ## Arquitectura general
 
 El sistema utilizará una arquitectura web por capas.
 
-```mermaid
-flowchart LR
+El flujo general de comunicación será:
 
-    A[PC o celular] --> B[Frontend web]
-    B --> C[API REST]
-    C --> D[Controllers]
-    D --> E[Services]
-    E --> F[Repositories]
-    F --> G[(PostgreSQL)]
-
-    C --> H[Swagger / OpenAPI]
+```text
+PC o celular
+     ↓
+Frontend web
+     ↓
+API REST
+     ↓
+Controllers
+     ↓
+Services
+     ↓
+Repositories
+     ↓
+PostgreSQL
 ```
 
+La API REST también contará con documentación mediante Swagger / OpenAPI.
+
 La comunicación entre frontend y backend se realizará mediante solicitudes HTTP y respuestas en formato JSON.
+
+La separación por capas permitirá distribuir responsabilidades y reducir el acoplamiento entre la interfaz, la lógica de negocio y el acceso a datos.
 
 ## Frontend
 
@@ -148,30 +157,41 @@ La identificación del proveedor, por ejemplo UN20 o K486, será almacenada como
 
 ## Flujo de registro de un movimiento
 
-El registro de un movimiento seguirá aproximadamente el siguiente flujo:
+El registro de un movimiento comenzará seleccionando el transformador sobre el que se está trabajando.
 
-```mermaid
-sequenceDiagram
+A partir del transformador seleccionado, el sistema mostrará sus materiales asociados para que el operario seleccione el material correspondiente.
 
-    actor Operario
-    participant Frontend
-    participant Controller
-    participant Service
-    participant Repository
-    participant PostgreSQL
+El flujo será:
 
-    Operario->>Frontend: Registra movimiento
-    Frontend->>Controller: POST /movimientos
-    Controller->>Service: registrarMovimiento()
-    Service->>Service: Validar reglas de negocio
-    Service->>Repository: Guardar movimiento
-    Repository->>PostgreSQL: INSERT movimiento
-    Service->>Repository: Actualizar ubicación del material
-    Repository->>PostgreSQL: UPDATE material
-    Service-->>Controller: Movimiento registrado
-    Controller-->>Frontend: Respuesta HTTP
-    Frontend-->>Operario: Confirmación
-```
+1. Seleccionar el transformador.
+2. Consultar sus materiales asociados.
+3. Seleccionar el material.
+4. Obtener su ubicación actual.
+5. Seleccionar el tipo de movimiento y la ubicación de destino.
+6. Validar los datos ingresados.
+7. Registrar el movimiento y actualizar la ubicación actual del material.
+8. Confirmar la operación si ambas modificaciones se completan correctamente.
+9. Revertir la operación si se produce un error.
+
+El siguiente diagrama representa las decisiones y resultados principales del proceso:
+
+![Flujo de registro de movimiento](diagramas/flujo-movimiento.png)
+
+[Archivo editable en diagrams.net](diagramas/flujo-movimiento.drawio)
+
+### Reglas consideradas en el flujo
+
+El origen podrá no existir cuando se registre el ingreso inicial de un material.
+
+La ubicación de destino será obligatoria.
+
+El operario que registre un movimiento no deberá ser necesariamente el mismo que registró el movimiento anterior.
+
+El registro del movimiento y la actualización de la ubicación actual del material deberán realizarse como una única operación transaccional.
+
+La advertencia por utilización de materiales correspondientes a otro transformador será aplicada en aquellas operaciones en las que pueda seleccionarse o utilizarse un material fuera del listado correspondiente al transformador actual.
+
+Esta decisión se encuentra documentada en el [ADR-007 — Modelo de ubicación actual e historial](adr/ADR-007-modelo-ubicaciones-movimientos.md).
 
 ## Integración con códigos QR
 
@@ -195,32 +215,21 @@ El código permitirá acceder rápidamente a la ubicación correspondiente desde
 
 ## Despliegue
 
-La aplicación funcionará dentro de la red local de la fábrica.
+La aplicación funcionará dentro de la red interna de la fábrica.
 
-```mermaid
-flowchart LR
+Los dispositivos autorizados, como computadoras y teléfonos celulares, accederán a la aplicación mediante la red local o Wi-Fi.
 
-    A[Celular del operario]
-    B[PC del área]
-    C[Red local / Wi-Fi]
-    D[Equipo servidor]
-    E[Aplicación Spring Boot]
-    F[(PostgreSQL)]
-    G[Servidor de respaldos]
+Para el despliegue definitivo se evaluará junto con el área de Sistemas la disponibilidad de un servidor interno, datacenter u otra infraestructura dedicada donde puedan ejecutarse el backend y PostgreSQL.
 
-    A --> C
-    B --> C
-    C --> D
-    D --> E
-    E --> F
-    F -. Backup semanal .-> G
-```
+Esta alternativa será preferible al uso permanente de una computadora ubicada directamente dentro del área productiva, ya que permite alojar la aplicación y los datos en una infraestructura más protegida y administrada.
 
-Los dispositivos cliente deberán estar conectados a la red interna.
+En caso de que la empresa no disponga de dicha infraestructura para la etapa inicial, podrá utilizarse un equipo dedicado conectado a la red interna como alternativa para realizar el piloto.
 
 La primera versión no dependerá de una conexión permanente a Internet.
 
-Las copias de seguridad se almacenarán en un equipo diferente del servidor principal.
+Las copias de seguridad deberán almacenarse en un equipo o servidor diferente de aquel donde se ejecuten la aplicación y la base de datos.
+
+La infraestructura definitiva quedará establecida una vez validada su disponibilidad con el área de Sistemas.
 
 ## Consistencia de los movimientos
 
@@ -238,6 +247,8 @@ Si ocurre un error durante el proceso, el sistema deberá evitar que quede:
 - Un movimiento registrado sin actualizar la ubicación.
 - Una ubicación actual modificada sin conservar el movimiento correspondiente.
 
+En caso de error, la operación deberá revertirse para mantener la consistencia de los datos.
+
 Esta lógica será responsabilidad de la capa de servicios.
 
 ## Decisiones relacionadas
@@ -250,3 +261,5 @@ La arquitectura se encuentra relacionada con las siguientes decisiones:
 - [ADR-005 — Despliegue web local](adr/ADR-005-despliegue-web-local.md)
 - [ADR-006 — PostgreSQL](adr/ADR-006-base-de-datos-postgresql.md)
 - [ADR-007 — Modelo de ubicación actual e historial](adr/ADR-007-modelo-ubicaciones-movimientos.md)
+
+La decisión registrada en el ADR-005 deberá revisarse una vez que el área de Sistemas confirme la infraestructura disponible para el despliegue definitivo.
